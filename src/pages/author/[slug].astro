@@ -77,5 +77,96 @@ const { params } = Astro.request;
 </DefaultPageLayout>
 
 <style lang="scss" global>
+  /* 8. Author Template
+/* ---------------------------------------------------------- */
 
+  .author-template .posts {
+    position: relative;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    grid-gap: 4vmin;
+  }
+
+  .author-template .posts .post-feed {
+    grid-column: 2 / 4;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .author-profile {
+    padding: 4vmin 0;
+  }
+
+  .author-profile-content {
+    height: auto;
+    position: sticky;
+    top: 4vmin;
+    font-size: 1.4rem;
+    line-height: 1.4em;
+  }
+
+  .author-profile-pic {
+    display: block;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 0 0 2rem;
+    background: color-mod(var(--color-lightgrey) l(+10%));
+    border-radius: 50%;
+  }
+
+  .author-profile h1 {
+    margin: 0 0 0.3em;
+    font-size: 2rem;
+  }
+
+  .author-profile p {
+    margin: 0 0 1.5em;
+    color: color-mod(var(--color-midgrey) l(-8%));
+  }
+
+  .author-profile-location {
+    margin: 0 0 1.5em;
+    font-weight: 700;
+  }
+
+  .author-profile-social-link {
+    display: block;
+    padding: 0 0 5px;
+    font-size: 1.3rem;
+    color: color-mod(var(--color-midgrey) l(-8%));
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  .author-profile-social-link:hover {
+    color: var(--color-darkgrey);
+  }
+
+  @media (max-width: 900px) {
+    .author-template .posts .post-feed {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .author-template .posts {
+      grid-template-columns: 1fr;
+      grid-gap: 0;
+    }
+    .author-template .posts .post-feed {
+      grid-column: 1 / auto;
+    }
+    .author-profile {
+      padding-right: 0;
+    }
+    .author-profile-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
 </style>

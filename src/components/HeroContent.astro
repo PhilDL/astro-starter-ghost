@@ -39,5 +39,75 @@ const {
 </div>
 
 <style lang="scss">
+  .site-header {
+    position: relative;
+    color: #fff;
+    background: var(--ghost-accent-color);
+  }
 
+  .site-header-cover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .site-header-content {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6vw 3vw;
+    min-height: 200px;
+    max-height: 340px;
+    text-align: center;
+  }
+
+  .site-title {
+    z-index: 10;
+    margin: 0 0 0.15em;
+    padding: 0;
+  }
+
+  .site-logo {
+    max-height: 55px;
+  }
+
+  .site-header-content p {
+    z-index: 10;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.2em;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 600px) {
+    .site-header-content p {
+      max-width: 80vmin;
+      font-size: 1.8rem;
+    }
+  }
+
+  /* 4.1 Home header
+/* ---------------------------------------------------------- */
+
+  .site-home-header {
+    position: relative;
+    z-index: 1000;
+    overflow: hidden;
+  }
+
+  .site-header-content {
+    padding: 18vmin 4vmin;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #fff;
+    background: var(--ghost-accent-color);
+  }
 </style>

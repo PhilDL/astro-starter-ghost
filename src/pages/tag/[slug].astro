@@ -61,3 +61,17 @@ const { params } = Astro.request;
     </div>
   </main>
 </DefaultPageLayout>
+
+<style lang="scss" global>
+  /* 8. Tag Template
+/* ---------------------------------------------------------- */
+
+  .tag-template .post-card-large .post-card-image-link {
+    grid-column: 2 / span 2;
+    order: 2;
+  }
+
+  .tag-template .post-card-large .post-card-content {
+    order: 1;
+  }
+</style>

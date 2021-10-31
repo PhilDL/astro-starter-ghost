@@ -22,5 +22,82 @@ const { settings } = Astro.props;
 </footer>
 
 <style lang="scss">
+  .site-footer {
+    position: relative;
+    margin: 40px 0 0 0;
+    padding: 40px 4vmin 140px;
+    color: #fff;
+    background: var(--color-darkgrey);
+  }
 
+  .site-footer .inner {
+    display: grid;
+    grid-gap: 40px;
+    grid-template-columns: auto 1fr auto;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.3rem;
+  }
+
+  .site-footer .copyright a {
+    color: #fff;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+  }
+
+  .site-footer a {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .site-footer a:hover {
+    color: rgba(255, 255, 255, 1);
+    text-decoration: none;
+  }
+
+  .site-footer-nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 0 20px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-footer-nav li {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    line-height: 2em;
+  }
+
+  .site-footer-nav a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  .site-footer-nav li:not(:first-child) a:before {
+    content: "";
+    display: block;
+    width: 2px;
+    height: 2px;
+    margin: 0 10px 0 0;
+    background: #fff;
+    border-radius: 100%;
+  }
+
+  @media (max-width: 800px) {
+    .site-footer .inner {
+      max-width: 500px;
+      grid-template-columns: 1fr;
+      grid-gap: 0;
+      text-align: center;
+    }
+    .site-footer .copyright,
+    .site-footer .copyright a {
+      color: #fff;
+      font-size: 1.5rem;
+    }
+  }
 </style>
