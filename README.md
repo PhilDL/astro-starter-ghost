@@ -13,4 +13,4 @@ Ghost CMS - Astro version with the Casper Theme
 
 ## Development Instructions
 
-Unlike the default Astro project settings, this theme uses `yarn start` instead of `yarn dev` for local development to be compatible with `vercel dev` for local function development.
+`yarn install` and then `yarn dev` for local development.
