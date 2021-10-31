@@ -10,8 +10,8 @@ const { tag, addClass = "", settings } = Astro.props;
   class={`tag-card ${addClass ? addClass : ""}`}
   style={tag.accent_color ? `--color-accent:${tag.accent_color}` : ""}>
   {tag.feature_image && (
-  <div class="tag-card__media">
-      <img class="tag-card__img lazyautosizes lazyloaded" 
+  <div class="tag-card-media">
+      <img class="tag-card-img" 
         data-srcset={`
           ${getGhostImgPath(settings.url, tag.feature_image, 100)} 100w,
           ${getGhostImgPath(settings.url, tag.feature_image, 300)} 300w
@@ -27,10 +27,9 @@ const { tag, addClass = "", settings } = Astro.props;
       >
     </div>  
   )}
-  <div
-    class={`tag-card__content flex flex-cc ${tag.feature_image ? "is-abs" : ""}`}>
-    <h4 class="tag-card__name flex-1">{tag.name}</h4>
-    {tag.count && <span class="tag-card__count">{tag.count.posts}+ Posts</span>}
+  <div class="tag-card-content">
+    <h4 class="tag-card-name">{tag.name}</h4>
+    {tag.count && <span class="tag-card-count">{tag.count.posts}+ Posts</span>}
   </div>
 </a>
 
