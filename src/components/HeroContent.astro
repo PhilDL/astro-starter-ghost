@@ -1,0 +1,43 @@
+---
+import { getGhostImgPath } from "$/utils";
+const {
+  featureImg = "https://static.ghost.org/v4.0.0/images/publication-cover.jpg",
+  mainTitle = "",
+  settings,
+  description = "",
+} = Astro.props;
+---
+
+<div class="site-header-content">
+  {featureImg && (
+        <img class="site-header-cover"
+            data-srcset={`
+            ${getGhostImgPath(settings.url, featureImg, 300)} 300w,
+            ${getGhostImgPath(settings.url, featureImg, 600)} 600w
+            ${getGhostImgPath(settings.url, featureImg, 1000)} 1000w
+            ${getGhostImgPath(settings.url, featureImg, 2000)} 2000w
+            `}
+            srcset={`
+            ${getGhostImgPath(settings.url, featureImg, 300)} 300w,
+            ${getGhostImgPath(settings.url, featureImg, 600)} 600w
+            ${getGhostImgPath(settings.url, featureImg, 1000)} 1000w
+            ${getGhostImgPath(settings.url, featureImg, 2000)} 2000w
+            `}
+            data-sizes="auto" 
+            data-src={getGhostImgPath(settings.url, featureImg, 2000)}
+            src={getGhostImgPath(settings.url, featureImg, 2000)} 
+            alt={mainTitle} sizes="100vw"
+        >
+    )}
+
+  <slot name="title">
+    <h1 class="site-title">
+      {settings.logo ? <img class="site-logo" src={getGhostImgPath(settings.url, settings.logo, 300)} alt={settings.title} /> : settings.title}
+    </h1>
+  </slot>
+  <p>{description}</p>
+</div>
+
+<style lang="scss">
+
+</style>

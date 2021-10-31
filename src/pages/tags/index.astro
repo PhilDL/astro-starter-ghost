@@ -1,0 +1,43 @@
+---
+import DefaultPageLayout from "$/layouts/default.astro";
+import TagCard from "$/components/TagCard.astro";
+import { getSettings, getAllTags } from "$/utils/api";
+
+let title = "All Tags";
+let description = "All the tags used so far...";
+
+const { tags } = await getAllTags({ include: "count.posts" });
+const { settings } = await getSettings();
+---
+
+<DefaultPageLayout content={{ title, description }} {settings}>
+  <section class="outer">
+    <div class="inner posts">
+      <h1>
+        {settings.title}
+      </h1>
+      <div class="page__excerpt m-t text-acc-3 text-center text-lg">
+        Collection of Tags
+      </div>
+      <div class="tag-feed">
+        {tags
+          .filter((tag) => !tag.slug.startsWith("hash-"))
+          .map((tag) => <article class="post-card ">
+              <TagCard tag={tag} settings={settings} />
+            </article>)}
+      </div>
+    </div>
+  </section>
+</DefaultPageLayout>
+
+<style lang="scss">
+  .tag-feed {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-auto-rows: 1fr;
+    grid-column-gap: 9vh;
+    grid-row-gap: 10vh;
+    padding: 4vmin 0;
+  }
+</style>

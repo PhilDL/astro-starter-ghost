@@ -1,0 +1,26 @@
+---
+const { settings } = Astro.props;
+---
+
+<footer class="site-footer outer">
+  <div class="inner">
+    <section class="copyright">
+      <a href="/">{settings.title}</a> &copy; 2021
+    </section>
+    <nav class="site-footer-nav">
+      {settings.secondary_navigation.length > 0 && <ul class="nav secondary">
+          {settings.secondary_navigation.map(({ label, url }) => <li class="">
+              <a href={url}>{label}</a>
+            </li>)}
+        </ul>}
+    </nav>
+    <div>
+      <a href="https://ghost.org/" target="_blank" rel="noopener"
+        >Powered by Ghost</a>
+    </div>
+  </div>
+</footer>
+
+<style lang="scss">
+
+</style>

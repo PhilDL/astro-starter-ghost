@@ -1,0 +1,19 @@
+---
+import PostHero from "$/components/PostHero.astro";
+import PostFooter from "$/components/PostFooter.astro";
+const { post, settings, postClass, posts } = Astro.props;
+---
+
+<main id="site-main" class="site-main">
+  <article class={`article ${postClass}`}>
+    <PostHero {post} {settings} />
+    <section class="gh-content gh-canvas">
+      {post.html}
+    </section>
+  </article>
+  <PostFooter {post} {settings} {posts} />
+</main>
+
+<style lang="scss">
+
+</style>

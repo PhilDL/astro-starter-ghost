@@ -1,0 +1,46 @@
+---
+import DefaultPageLayout from "$/layouts/default.astro";
+import Page from "$/components/Page.astro";
+import Post from "$/components/Post.astro";
+import { getAllPosts, getAllPages, getSettings } from "$/utils/api";
+
+export async function getStaticPaths({ rss }) {
+  let { posts } = await getAllPosts({ include: "authors,tags" });
+  let { pages } = await getAllPages({ include: "authors,tags" });
+  posts = posts.concat(pages);
+  const { settings } = await getSettings();
+  rss({
+    title: settings.title,
+    description: settings.description,
+    customData: `<language>en-us</language>`,
+    items: posts.map((item) => ({
+      title: item.title,
+      description: item.excerpt,
+      link: item.url,
+      pubDate: item.created_at,
+    })),
+  });
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post, posts, settings },
+  }));
+}
+const { post, posts, settings } = Astro.props;
+const postClass = post.tags.map((tag) => "tag-" + tag.slug).join(" ");
+const bodyClass = `post-template ${postClass}`;
+---
+
+<DefaultPageLayout
+  content={{ title: post.title, description: post.description }}
+  {settings}
+  {bodyClass}>
+  {post.page ? 
+  <Page page={post} {settings} pageClass={postClass} />
+  :
+  <Post {post} {settings} {postClass} {posts} />
+  }
+</DefaultPageLayout>
+
+<style lang="scss">
+
+</style>

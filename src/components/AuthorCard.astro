@@ -1,0 +1,51 @@
+---
+import { getGhostImgPath } from "$/utils";
+const {
+  author,
+  wide = false,
+  addClass = "",
+  settings,
+  showCover = true,
+} = Astro.props;
+---
+
+<div class={`card author-card author-${author.slug} ${wide ? "wide" : ""}`}>
+  <figure class="author-card__cover">
+    {author.cover_image && showCover && <img class="lazyautosizes lazyloaded" data-srcset={`
+            ${getGhostImgPath(settings.url, author.cover_image, 300)} 300w,
+            ${getGhostImgPath(settings.url, author.cover_image, 600)} 600w
+          `} srcset={`
+            ${getGhostImgPath(settings.url, author.cover_image, 300)} 300w,
+            ${getGhostImgPath(settings.url, author.cover_image, 600)} 600w
+        `} data-sizes="auto" data-src={getGhostImgPath(settings.url, author.cover_image, 300)} src={getGhostImgPath(settings.url, author.cover_image, 300)} alt={author.name} sizes="316px" />}
+  </figure>
+
+  {author.profile_image && <a href={`/author/${author.slug}`} class="author-card__media flex flex-cc is-round">
+      <img class="author-card__img is-round z-index-1 lazyautosizes ls-is-cached lazyloaded" data-srcset={`
+            ${getGhostImgPath(settings.url, author.profile_image, 100)} 100w,
+            ${getGhostImgPath(settings.url, author.profile_image, 300)} 300w
+          `} srcset={`
+            ${getGhostImgPath(settings.url, author.profile_image, 100)} 100w,
+            ${getGhostImgPath(settings.url, author.profile_image, 300)} 300w
+        `} data-sizes="auto" data-src={getGhostImgPath(settings.url, author.profile_image, 300)} src={getGhostImgPath(settings.url, author.profile_image, 300)} alt={author.name} sizes="316px" />
+    </a>}
+  <div class="author-card__content flex-1 flex flex-col text-acc-1">
+    <div class="author-card__name fw-700 m-b-xs">
+      <a href={`/author/${author.slug}`}>{author.name}</a>
+    </div>
+
+    {author.bio && <div class="author-card__descr flex-1 text-acc-3 m-b">
+        {author.bio}
+      </div>}
+
+    <div class="author-card__details flex text-acc-3">
+      {author.count && author.count.posts && <div class="fw-600 flex-1 text-sm">
+          {author.count.posts > 0 ? `${author.count.posts} posts` : "No posts"}
+        </div>}
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+
+</style>

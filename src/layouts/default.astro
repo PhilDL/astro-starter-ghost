@@ -1,0 +1,42 @@
+---
+import BaseHead from "$/components/BaseHead.astro";
+import MainLayout from "$/components/MainLayout.astro";
+
+const { content, settings, bodyClass = "", mainClass = "" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" data-color-scheme="light">
+  <head>
+    <BaseHead
+      title={content.title ? `${settings.title} | ${content.title}` : settings.title}
+      description={content.description}
+      {settings} />
+  </head>
+  <MainLayout {settings} {bodyClass} {mainClass}>
+    <slot />
+  </MainLayout>
+</html>
+
+<style lang="scss" global>
+  @mixin mq-sm {
+    @media only screen and (min-width: 36em) {
+      @content;
+    }
+  }
+  @mixin mq-md {
+    @media only screen and (min-width: 48em) {
+      @content;
+    }
+  }
+  @mixin mq-lg {
+    @media only screen and (min-width: 62em) {
+      @content;
+    }
+  }
+  @mixin mq-xl {
+    @media only screen and (min-width: 75em) {
+      @content;
+    }
+  }
+</style>

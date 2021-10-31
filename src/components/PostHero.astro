@@ -1,0 +1,47 @@
+---
+import FeatureImage from "$/components/FeatureImage.astro";
+import { getGhostImgPath, formatDate } from "$/utils";
+const { post, settings } = Astro.props;
+---
+
+<header class="article-header gh-canvas">
+  {post.primary_tag && <section class="article-tag">
+      <a href={`/tag/${post.primary_tag.slug}`}>{post.primary_tag.name}</a>
+    </section>}
+  <h1 class="article-title">{post.title}</h1>
+
+  {post.custom_excerpt && <p class="article-excerpt">{post.custom_excerpt}</p>}
+  <div class="article-byline">
+    <section class="article-byline-content">
+      <ul class="author-list">
+        {post.authors.map((author) => <li class="author-list-item">
+            {author.profile_image ? <a href={`/author/${author.slug}`}>
+                <img class="author-profile-image" src={getGhostImgPath(settings.url, author.profile_image, 100)} alt={author.name} />
+              </a> : <a href={`/author/${author.slug}`}>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="none" fill-rule="evenodd">
+                    <path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF" />
+                  </g>
+                </svg>
+              </a>}
+          </li>)}
+      </ul>
+      <div class="article-byline-meta">
+        <h4 class="author-name">
+          {post.authors.map((author) => author.name).join(", ")}
+        </h4>
+        <div class="byline-meta-content">
+          <time class="byline-meta-date" datetime={formatDate(post.created_at)}
+            >{formatDate(post.created_at)}</time>
+          <span class="byline-reading-time"
+            ><span class="bull">&bull;</span> {post.reading_time}</span>
+        </div>
+      </div>
+    </section>
+  </div>
+  {post.feature_image && <FeatureImage image={post.feature_image} alt={post.feature_image_alt ? post.feature_image_alt : post.title} caption={post.feature_image_caption} settings={settings} />}
+</header>
+
+<style lang="scss">
+
+</style>

@@ -1,0 +1,20 @@
+---
+import BaseLayout from "$/components/BaseLayout.astro";
+import Header from "$/components/Header.astro";
+import Footer from "$/components/Footer.astro";
+const { settings, bodyClass = "" } = Astro.props;
+---
+
+<BaseLayout {bodyClass}>
+  <Header {settings} />
+  <div class="site-content">
+    <slot />
+  </div>
+  <Footer {settings} />
+</BaseLayout>
+
+<style>
+  .content {
+    min-height: 580px;
+  }
+</style>

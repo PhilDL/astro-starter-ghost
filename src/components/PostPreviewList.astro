@@ -1,0 +1,12 @@
+---
+import PostPreview from "$/components/PostPreview.astro";
+const { posts, settings, isHome = false } = Astro.props;
+---
+
+<div class="post-feed">
+  {posts.map( (post, index) => <PostPreview post={post} index={index} settings={settings} isHome={isHome} /> )}
+</div>
+
+<style lang="scss">
+
+</style>

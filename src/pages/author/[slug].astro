@@ -1,0 +1,81 @@
+---
+import DefaultPageLayout from "$/layouts/default.astro";
+import PostPreviewList from "$/components/PostPreviewList.astro";
+import { getAllPosts, getAllAuthors, getSettings } from "$/utils/api";
+
+export async function getStaticPaths({}) {
+  const { posts } = await getAllPosts({ include: "authors,tags" });
+  const { authors } = await getAllAuthors({ include: "count.posts" });
+  const { settings } = await getSettings();
+
+  return authors.map((author) => {
+    const filteredPosts = posts.filter((post) =>
+      post.authors.map((author) => author.slug).includes(author.slug)
+    );
+    return {
+      params: { slug: author.slug },
+      props: {
+        posts: filteredPosts,
+        settings,
+        author,
+      },
+    };
+  });
+}
+
+const { posts, settings, author } = Astro.props;
+const { params } = Astro.request;
+---
+
+<DefaultPageLayout
+  bodyClass={`author-template author-${author.slug}`}
+  content={{ title: `Posts by author: ${params.author}`, description: `all of the articles we've posted and linked so far under the author: ${params.author}` }}
+  {settings}>
+  <section class="outer">
+    <div class="inner posts">
+      <header class="author-profile">
+        <div class="author-profile-content">
+          {author.profile_image ? <img class="author-profile-pic" src={author.profile_image} alt={author.name} /> : <span class="author-profile-pic">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fill-rule="evenodd">
+                  <path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF" />
+                </g>
+              </svg>
+            </span>}
+          <h1>{author.name}</h1>
+          <p>
+            {author.bio ? author.bio : author.count.posts > 0 ? `${author.count.posts.length} Posts` : "No posts"}
+          </p>
+
+          <div class="author-profile-meta">
+            {author.location && <div class="author-profile-location">
+                📍 {author.location}
+              </div>}
+
+            {author.website && <span>
+                <a class="author-profile-social-link" href={author.website} target="_blank" rel="noopener">
+                  {author.website}
+                </a>
+              </span>}
+            {author.twitter && <span>
+                <a class="author-profile-social-link" href={author.twitter} target="_blank" rel="noopener">
+                  {author.twitter}
+                </a>
+              </span>}
+            {author.facebook && <span>
+                <a class="author-profile-social-link" href={author.facebook} target="_blank" rel="noopener">
+                  {author.facebook}
+                </a>
+              </span>}
+          </div>
+        </div>
+      </header>
+
+      <PostPreviewList {posts} {settings} />
+    </div>
+  </section>
+</DefaultPageLayout>
+
+<style lang="scss" global>
+
+</style>

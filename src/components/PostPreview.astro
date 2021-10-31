@@ -1,0 +1,69 @@
+---
+const { post, settings, index, isHome = false } = Astro.props;
+import { truncate, getGhostImgPath, formatDate } from "$/utils";
+---
+
+<article
+  class={`post-card ${post.tags
+    .map((tag) => `tag-${tag.slug}`)
+    .join(" ")} ${isHome && post.feature_image && index == 0 ? "post-card-large" : ""}`}>
+  <a class="post-card-image-link" href={`/${post.slug}`}>
+    <img
+      class="post-card-image"
+      srcset={`
+        ${getGhostImgPath(settings.url, post.feature_image, 300)} 300w, 
+        ${getGhostImgPath(settings.url, post.feature_image, 600)} 600w
+        ${getGhostImgPath(settings.url, post.feature_image, 1000)} 1000w
+        ${getGhostImgPath(settings.url, post.feature_image, 2000)} 2000w
+      `}
+      src={`${getGhostImgPath(settings.url, post.feature_image, 600)}`}
+      alt={post.title}
+      sizes="(max-width: 1000px) 400px, 800px"
+      loading="lazy" />
+  </a>
+  <div class="post-card-content">
+    <a class="post-card-content-link" href={`/${post.slug}`}>
+      <header class="post-card-header">
+        {post.primary_tag && <div class="post-card-primary-tag">
+            {post.primary_tag.name}
+          </div>}
+        <h2 class="post-card-title">{post.title}</h2>
+      </header>
+      <div class="post-card-excerpt">
+        <p>{post.excerpt}</p>
+      </div>
+    </a>
+
+    <footer class="post-card-meta">
+      <ul class="author-list">
+        {post.authors.map((author) => <li class="author-list-item">
+            {author.profile_image ? <a href={`/author/${author.slug}`} class="static-avatar">
+                <img class="author-profile-image" src={author.profile_image} alt={author.name} />
+              </a> : <a href={`/author/${author.slug}`} class="static-avatar author-profile-image">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="none" fill-rule="evenodd">
+                    <path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF" />
+                  </g>
+                </svg>
+              </a>}
+          </li>)}
+      </ul>
+      <div class="post-card-byline-content">
+        <span>{post.primary_author.name}</span>
+        <span class="post-card-byline-date"
+          ><time datetime={formatDate(post.created_at)}
+            >{formatDate(post.created_at)}</time>
+          <span class="bull">&bull;</span>
+          {post.reading_time}</span>
+      </div>
+    </footer>
+  </div>
+</article>
+
+<style lang="scss">
+  $color-midgrey: #738a94;
+  .post-card-excerpt {
+    max-width: 56em;
+    color: darken($color-midgrey, 8);
+  }
+</style>

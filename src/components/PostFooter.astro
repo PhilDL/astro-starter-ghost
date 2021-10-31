@@ -1,0 +1,27 @@
+---
+import PostPreview from "$/components/PostPreview.astro";
+const { post, settings, posts } = Astro.props;
+---
+
+<section class="footer-cta">
+  <div class="inner">
+    <h2>Sign up for more like this.</h2>
+    <a class="footer-cta-button" href="#/portal">
+      <div>Enter your email</div>
+      <span>Subscribe</span>
+    </a>
+  </div>
+</section>
+
+<aside class="read-more-wrap">
+  <div class="read-more inner">
+    {posts
+      .filter((p) => p.id !== post.id)
+      .slice(0, 3)
+      .map((post) => <PostPreview post={post} settings={settings} />)}
+  </div>
+</aside>
+
+<style lang="scss">
+
+</style>

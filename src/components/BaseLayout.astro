@@ -1,0 +1,9 @@
+---
+const { bodyClass = "" } = Astro.props;
+---
+
+<body class={`${bodyClass}`}>
+  <div class="viewport">
+    <slot />
+  </div>
+</body>

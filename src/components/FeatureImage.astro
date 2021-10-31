@@ -1,0 +1,22 @@
+---
+import { getGhostImgPath } from "$/utils";
+const { image, alt, caption = "", settings } = Astro.props;
+---
+
+<figure class="article-image">
+  <img
+    srcset={`
+          ${getGhostImgPath(settings.url, image, 300)}   300w,
+          ${getGhostImgPath(settings.url, image, 600)}   600w,
+          ${getGhostImgPath(settings.url, image, 1000)} 1000w,
+          ${getGhostImgPath(settings.url, image, 2000)} 2000w
+        `}
+    sizes="(min-width: 1400px) 1400px, 92vw"
+    src={getGhostImgPath(settings.url, image, 2000)}
+    {alt} />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style lang="scss">
+
+</style>

@@ -1,0 +1,24 @@
+{
+  "name": "astro-starter-ghost",
+  "version": "0.0.1",
+  "private": true,
+  "description": "A starter template to build lightning fast websites with Ghost and Astro",
+  "license": "MIT",
+  "author": "PhilDL",
+  "homepage": "https://github.com/PhilDL/astro-starter-ghost/",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@snowpack/plugin-dotenv": "^2.2.0",
+    "astro": "^0.19.0-next.3",
+    "prettier": "^2.4.1",
+    "prettier-plugin-astro": "^0.0.9",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@tryghost/content-api": "^1.5.13"
+  }
+}

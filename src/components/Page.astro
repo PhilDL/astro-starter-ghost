@@ -1,0 +1,27 @@
+---
+import FeatureImage from "$/components/FeatureImage.astro";
+const { page, settings, pageClass } = Astro.props;
+---
+
+<main id="site-main" class="site-main">
+  <article class={`article ${pageClass}`}>
+    <header class="article-header gh-canvas">
+      {page.feature_image && 
+      <FeatureImage
+        image={page.feature_image}
+        alt={page.feature_image_alt ? page.feature_image_alt : page.title}
+        caption={page.feature_image_caption}
+        {settings} />
+        }
+    </header>
+
+    <section class="gh-content gh-canvas">
+      <h1 class="article-title">{page.title}</h1>
+      {page.html}
+    </section>
+  </article>
+</main>
+
+<style lang="scss">
+
+</style>
