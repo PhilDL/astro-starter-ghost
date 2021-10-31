@@ -23,5 +23,97 @@ const { post, settings, posts } = Astro.props;
 </aside>
 
 <style lang="scss">
+  /* 7.3. Subscribe
+/* ---------------------------------------------------------- */
 
+  .footer-cta {
+    position: relative;
+    padding: 9vmin 4vmin 10vmin;
+    color: #fff;
+    text-align: center;
+    background: var(--color-darkgrey);
+  }
+
+  /* Increases the default h2 size by 15%, for small and large screens */
+  .footer-cta h2 {
+    margin: 0 0 30px;
+    font-size: 3.2rem;
+  }
+
+  @media (max-width: 600px) {
+    .footer-cta h2 {
+      font-size: 2.65rem;
+    }
+  }
+
+  .footer-cta-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px;
+    padding: 5px 5px 5px 15px;
+    font-size: 1.8rem;
+    color: var(--color-midgrey);
+    background: #fff;
+    border-radius: 8px;
+  }
+
+  .footer-cta-button span {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    font-weight: 500;
+    background: var(--ghost-accent-color);
+    border-radius: 5px;
+  }
+
+  /* 7.4. Read more
+/* ---------------------------------------------------------- */
+
+  .read-more-wrap {
+    width: 100%;
+    padding: 4vmin;
+    margin: 0 auto -40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: color-mod(var(--color-darkgrey) l(-5%));
+  }
+
+  .read-more {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 4vmin;
+  }
+
+  .read-more .post-card-title {
+    color: #fff;
+    opacity: 0.8;
+  }
+
+  .read-more .post-card-excerpt {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .read-more .post-card-byline-content a {
+    color: #fff;
+  }
+
+  @media (max-width: 1000px) {
+    .read-more {
+      grid-template-columns: 1fr 1fr;
+    }
+    .read-more article:nth-child(3) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .read-more {
+      grid-template-columns: 1fr;
+    }
+    .read-more article:nth-child(2) {
+      display: none;
+    }
+  }
 </style>

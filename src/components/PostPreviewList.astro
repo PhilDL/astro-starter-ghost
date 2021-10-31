@@ -8,5 +8,23 @@ const { posts, settings, isHome = false } = Astro.props;
 </div>
 
 <style lang="scss">
+  .post-feed {
+    position: relative;
+    display: grid;
+    grid-gap: 4vmin;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 4vmin 0;
+  }
 
+  @media (max-width: 1000px) {
+    .post-feed {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 700px) {
+    .post-feed {
+      grid-template-columns: 1fr;
+      grid-gap: 40px;
+    }
+  }
 </style>
