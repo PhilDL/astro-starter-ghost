@@ -2,6 +2,7 @@
 import DefaultPageLayout from "$/layouts/default.astro";
 import PostPreviewList from "$/components/PostPreviewList.astro";
 import { getAllPosts, getAllAuthors, getSettings } from "$/utils/api";
+import { twitter, facebook } from "@tryghost/social-urls";
 
 export async function getStaticPaths({}) {
   const { posts } = await getAllPosts({ include: "authors,tags" });
@@ -58,12 +59,12 @@ const { params } = Astro.request;
                 </a>
               </span>}
             {author.twitter && <span>
-                <a class="author-profile-social-link" href={author.twitter} target="_blank" rel="noopener">
+                <a class="author-profile-social-link" href={twitter(author.twitter)} target="_blank" rel="noopener">
                   {author.twitter}
                 </a>
               </span>}
             {author.facebook && <span>
-                <a class="author-profile-social-link" href={author.facebook} target="_blank" rel="noopener">
+                <a class="author-profile-social-link" href={facebook(author.facebook)} target="_blank" rel="noopener">
                   {author.facebook}
                 </a>
               </span>}
