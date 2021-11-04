@@ -1,7 +1,7 @@
 ---
 import DefaultPageLayout from "$/layouts/default.astro";
 import PostPreviewList from "$/components/PostPreviewList.astro";
-import HeroContent from "$/components/HeroContent.astro";
+import HeroContent from "$/components/HeroContent.astro"
 import { getSettings, getAllPosts } from "$/utils/api";
 const { posts } = await getAllPosts({ include: "authors,tags" });
 const { settings } = await getSettings();
