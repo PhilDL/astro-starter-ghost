@@ -31,10 +31,11 @@ const {
   <MainLayout {settings} {bodyClass} {mainClass}>
     <slot />
   </MainLayout>
-  <slot />
 </html>
 
 <style lang="scss" global>
+  @import "../styles/reset.scss";
+  @import "../styles/app.scss";
   @mixin mq-sm {
     @media only screen and (min-width: 36em) {
       @content;

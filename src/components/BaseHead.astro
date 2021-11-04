@@ -47,7 +47,6 @@ const { description, permalink, image, settings, title } = Astro.props as Props;
 {image && <meta property="twitter:image" content={image} />}
 
 <!-- Link to the global style, or the file that imports constructs -->
-<link rel="stylesheet" href={Astro.resolve("../styles/app.scss")} />
 <link
   rel="preload"
   href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css"
@@ -67,5 +66,3 @@ const { description, permalink, image, settings, title } = Astro.props as Props;
   defer
   src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"
 ></script>
-
-<script src={Astro.resolve("../components/script.js")} hoist></script>
