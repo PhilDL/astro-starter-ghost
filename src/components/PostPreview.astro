@@ -1,11 +1,18 @@
 ---
-const { post, settings, index, isHome = false } = Astro.props;
-import { truncate, getGhostImgPath, formatDate } from "$/utils";
+import { getGhostImgPath, formatDate } from "$/utils";
+import type { GhostSettings, Post, Tag, Author } from "$/types.d.ts";
+export type Props = {
+  post: Post;
+  settings: GhostSettings;
+  index?: number;
+  isHome?: boolean;
+};
+const { post, settings, index, isHome = false } = Astro.props as Props;
 ---
 
 <article
   class={`post-card ${post.tags
-    .map((tag) => `tag-${tag.slug}`)
+    .map((tag: Tag) => `tag-${tag.slug}`)
     .join(" ")} ${isHome && post.feature_image && index == 0 ? "post-card-large" : ""}`}>
   <a class="post-card-image-link" href={`/${post.slug}`}>
     <img
@@ -36,7 +43,7 @@ import { truncate, getGhostImgPath, formatDate } from "$/utils";
 
     <footer class="post-card-meta">
       <ul class="author-list">
-        {post.authors.map((author) => <li class="author-list-item">
+        {post.authors.map((author: Author) => <li class="author-list-item">
             {author.profile_image ? <a href={`/author/${author.slug}`} class="static-avatar">
                 <img class="author-profile-image" src={author.profile_image} alt={author.name} />
               </a> : <a href={`/author/${author.slug}`} class="static-avatar author-profile-image">

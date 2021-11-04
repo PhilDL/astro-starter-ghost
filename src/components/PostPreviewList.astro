@@ -1,10 +1,16 @@
 ---
-import PostPreview from "$/components/PostPreview.astro";
-const { posts, settings, isHome = false } = Astro.props;
+import PostPreview from "$components/PostPreview.astro";
+import type { GhostSettings, Post } from "$/types.d.ts";
+export type Props = {
+  posts: Post[];
+  settings: GhostSettings;
+  isHome?: boolean;
+};
+const { posts, settings, isHome = false } = Astro.props as Props;
 ---
 
 <div class="post-feed">
-  {posts.map( (post, index) => <PostPreview post={post} index={index} settings={settings} isHome={isHome} /> )}
+  {posts.map( (post: Post, index: number) => <PostPreview post={post} index={index} settings={settings} isHome={isHome} /> )}
 </div>
 
 <style lang="scss">

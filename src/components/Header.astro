@@ -1,6 +1,10 @@
 ---
-const { settings } = Astro.props;
 import { twitter, facebook } from "@tryghost/social-urls";
+import type { GhostSettings } from "$/types.d.ts";
+export type Props = {
+  settings: GhostSettings;
+};
+const { settings } = Astro.props as Props;
 ---
 
 <header

@@ -1,7 +1,14 @@
 ---
-import PostHero from "$/components/PostHero.astro";
-import PostFooter from "$/components/PostFooter.astro";
-const { post, settings, postClass, posts } = Astro.props;
+import PostHero from "$components/PostHero.astro";
+import PostFooter from "$components/PostFooter.astro";
+import type { GhostSettings, Post } from "$/types.d.ts";
+export type Props = {
+  post: Post;
+  settings: GhostSettings;
+  postClass?: string;
+  posts: Post[];
+};
+const { post, settings, postClass, posts } = Astro.props as Props;
 ---
 
 <main id="site-main" class="site-main">

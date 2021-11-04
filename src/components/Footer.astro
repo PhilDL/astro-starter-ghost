@@ -1,5 +1,9 @@
 ---
-const { settings } = Astro.props;
+import type { GhostSettings } from "$/types.d.ts";
+export type Props = {
+  settings: GhostSettings;
+};
+const { settings } = Astro.props as Props;
 ---
 
 <footer class="site-footer outer">

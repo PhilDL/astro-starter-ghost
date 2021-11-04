@@ -1,6 +1,13 @@
 ---
 import { getGhostImgPath } from "$/utils";
-const { image, alt, caption = "", settings } = Astro.props;
+import type { GhostSettings } from "$/types.d.ts";
+export type Props = {
+  image: string;
+  alt?: string;
+  caption?: string;
+  settings: GhostSettings;
+};
+const { image, alt, caption = "", settings } = Astro.props as Props;
 ---
 
 <figure class="article-image">

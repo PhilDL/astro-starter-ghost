@@ -1,12 +1,20 @@
 ---
 import { getGhostImgPath } from "$/utils";
+import type { GhostSettings, Author } from "$/types.d.ts";
+export type Props = {
+  author: Author;
+  wide?: boolean;
+  addClass?: string;
+  settings: GhostSettings;
+  showCover?: boolean;
+};
 const {
   author,
   wide = false,
   addClass = "",
   settings,
   showCover = true,
-} = Astro.props;
+} = Astro.props as Props;
 ---
 
 <div class={`card author-card author-${author.slug} ${wide ? "wide" : ""}`}>

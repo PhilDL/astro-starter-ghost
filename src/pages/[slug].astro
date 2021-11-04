@@ -1,7 +1,7 @@
 ---
 import DefaultPageLayout from "$/layouts/default.astro";
-import Page from "$/components/Page.astro";
-import Post from "$/components/Post.astro";
+import Page from "$components/Page.astro";
+import Post from "$components/Post.astro";
 import { getAllPosts, getAllPages, getSettings } from "$/utils/api";
 
 export async function getStaticPaths({ rss }) {

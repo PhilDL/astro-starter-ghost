@@ -1,7 +1,12 @@
 ---
-import FeatureImage from "$/components/FeatureImage.astro";
+import FeatureImage from "$components/FeatureImage.astro";
 import { getGhostImgPath, formatDate } from "$/utils";
-const { post, settings } = Astro.props;
+import type { GhostSettings, Post, Author } from "$/types.d.ts";
+export type Props = {
+  post: Post;
+  settings: GhostSettings;
+};
+const { post, settings } = Astro.props as Props;
 ---
 
 <header class="article-header gh-canvas">
@@ -14,7 +19,7 @@ const { post, settings } = Astro.props;
   <div class="article-byline">
     <section class="article-byline-content">
       <ul class="author-list">
-        {post.authors.map((author) => <li class="author-list-item">
+        {post.authors.map((author: Author) => <li class="author-list-item">
             {author.profile_image ? <a href={`/author/${author.slug}`}>
                 <img class="author-profile-image" src={getGhostImgPath(settings.url, author.profile_image, 100)} alt={author.name} />
               </a> : <a href={`/author/${author.slug}`}>
@@ -28,7 +33,7 @@ const { post, settings } = Astro.props;
       </ul>
       <div class="article-byline-meta">
         <h4 class="author-name">
-          {post.authors.map((author) => author.name).join(", ")}
+          {post.authors.map((author: Author) => author.name).join(", ")}
         </h4>
         <div class="byline-meta-content">
           <time class="byline-meta-date" datetime={formatDate(post.created_at)}

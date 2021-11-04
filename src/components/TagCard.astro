@@ -1,5 +1,11 @@
 ---
 import { getGhostImgPath } from "$/utils";
+import type { GhostSettings, Tag } from "$/types.d.ts";
+export type Props = {
+  tag: Tag;
+  addClass?: string;
+  settings: GhostSettings;
+};
 const { tag, addClass = "", settings } = Astro.props;
 ---
 

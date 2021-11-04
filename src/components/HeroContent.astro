@@ -1,11 +1,20 @@
 ---
 import { getGhostImgPath } from "$/utils";
+import type { GhostSettings } from "$/types.d.ts";
+export type Props = {
+  featureImg?: string;
+  mainTitle?: string;
+  settings: GhostSettings;
+  description?: string;
+  addClass?: string;
+};
 const {
   featureImg = "https://static.ghost.org/v4.0.0/images/publication-cover.jpg",
   mainTitle = "",
   settings,
   description = "",
-} = Astro.props;
+  addClass = "",
+} = Astro.props as Props;
 ---
 
 <div class="site-header-content">
