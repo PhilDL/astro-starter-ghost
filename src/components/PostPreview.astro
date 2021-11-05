@@ -67,7 +67,9 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
   </div>
 </article>
 
-<style lang="scss">
+<style lang="scss" global>
+  @use "sass:color";
+
   .post-card {
     position: relative;
     flex: 1 1 301px;
@@ -76,6 +78,11 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
     min-height: 220px;
     background-size: cover;
     word-break: break-word;
+  }
+
+  .post-card-excerpt {
+    max-width: 56em;
+    color: color.scale(#738a94, $lightness: -8%);
   }
 
   .post-card-image-link {
