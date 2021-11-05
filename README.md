@@ -4,9 +4,11 @@
 
 A starter template to build super fast websites with [Ghost](https://ghost.org/) and [Astro](https://github.com/snowpackjs/astro)
 
-Astro Next compatible: Currently using **astro@0.21.0-next.1***
+**Live Demo**: [https://astro-starter-ghost.netlify.app/](https://astro-starter-ghost.netlify.app/)
 
 ## Features
+
+Astro Next compatible: Currently using **astro@0.21.0-next.1***
 
 - Pages / Posts
 - Tag
