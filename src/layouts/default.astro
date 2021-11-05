@@ -18,6 +18,7 @@ const {
   bodyClass = "",
   mainClass = "",
 } = Astro.props as Props;
+const ghostAccentColor = settings.accent_color;
 ---
 
 <!DOCTYPE html>
@@ -33,7 +34,11 @@ const {
   </MainLayout>
 </html>
 
-<style lang="scss" global>
+<style
+  lang="scss"
+  global
+  define:vars={{ "ghost-accent-color": ghostAccentColor }}
+>
   @import "../styles/reset.scss";
   @import "../styles/app.scss";
   @mixin mq-sm {
