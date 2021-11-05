@@ -32,23 +32,6 @@
     sans-serif;
   --font-serif: Georgia, Times, serif;
   --font-mono: Menlo, Courier, monospace;
-  --ghost-accent-color: #7550f7;
-  --global-theme-notifications: flex; /* flex/none */
-  --global-intro-bg: var(--color-primary); /* you can add your own color */
-  --global-theme-toggle: flex; /* flex/none */
-  --global-search: flex; /* flex/none */
-  --global-search-by-tag: flex; /* flex/none */
-  --global-max-width: 1390px; /* site max width */
-  --global-content-width: 40rem; /* post-content-width */
-  --global-radius: 5px; /* default radius */
-  --global-gallery-gap: 0.5em; /* Image gallery distance between images */
-  --global-hyphens: none; /* none/auto */
-  --global-header-position: sticky; /* relative/sticky */
-  --global-header-height: 80px;
-  --global-progress-bar: visible; /* visible/hidden */
-  --global-scroll-top: hidden; /* visible/hidden */
-  --global-content-preview-fading: 10%; /* 80%-100% for fading effect */
-  --global-announcement-height: 60px;
 }
 
 /* 2. Layout - Page building blocks

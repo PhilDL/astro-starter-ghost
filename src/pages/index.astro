@@ -1,7 +1,7 @@
 ---
 import DefaultPageLayout from "$/layouts/default.astro";
 import PostPreviewList from "$/components/PostPreviewList.astro";
-import HeroContent from "$/components/HeroContent.astro";
+import HeroContent from "$/components/HeroContent.astro"
 import { getSettings, getAllPosts } from "$/utils/api";
 const { posts } = await getAllPosts({ include: "authors,tags" });
 const { settings } = await getSettings();
@@ -11,18 +11,18 @@ const description = settings.description;
 
 <DefaultPageLayout
   content={{ title, description }}
-  {settings}
+  settings={settings}
   bodyClass={"home-template"}>
   <HeroContent
     mainTitle={settings.title}
     description={settings.description}
     featureImg={settings.cover_image}
-    {settings}
+    settings={settings}
     addClass={"hero-cta bg-gradient"} />
 
   <main id="site-main" class="site-main outer">
     <div class="inner posts">
-      <PostPreviewList {posts} {settings} isHome={true} />
+      <PostPreviewList posts={posts} settings={settings} isHome={true} />
     </div>
   </main>
 </DefaultPageLayout>

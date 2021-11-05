@@ -1,6 +1,12 @@
 ---
-import FeatureImage from "$/components/FeatureImage.astro";
-const { page, settings, pageClass } = Astro.props;
+import FeatureImage from "$components/FeatureImage.astro";
+import type { GhostSettings, Page } from "$/types.d.ts";
+export type Props = {
+  page: Page;
+  settings: GhostSettings;
+  pageClass?: string;
+};
+const { page, settings, pageClass } = Astro.props as Props;
 ---
 
 <main id="site-main" class="site-main">

@@ -1,6 +1,10 @@
 ---
-const { settings } = Astro.props;
 import { twitter, facebook } from "@tryghost/social-urls";
+import type { GhostSettings } from "$/types.d.ts";
+export type Props = {
+  settings: GhostSettings;
+};
+const { settings } = Astro.props as Props;
 ---
 
 <header
@@ -387,3 +391,26 @@ import { twitter, facebook } from "@tryghost/social-urls";
     margin-left: -2.5vmin;
   }
 </style>
+
+<script>
+const handleMenu = () => {
+  // menu
+  const burgerButton = document.querySelector(".gh-burger");
+  if (burgerButton) {
+    burgerButton.addEventListener("click", () => {
+      const body = document.querySelector("body");
+      body.classList.toggle("gh-head-open");
+    });
+  }
+};
+
+const callback = () => {
+  handleMenu();
+};
+
+if (document.readyState === "complete") {
+  callback();
+} else {
+  document.addEventListener("DOMContentLoaded", callback);
+}
+</script>

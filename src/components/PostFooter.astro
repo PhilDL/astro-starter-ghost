@@ -1,6 +1,12 @@
 ---
-import PostPreview from "$/components/PostPreview.astro";
-const { post, settings, posts } = Astro.props;
+import PostPreview from "$components/PostPreview.astro";
+import type { GhostSettings, Post } from "$/types.d.ts";
+export type Props = {
+  post: Post;
+  settings: GhostSettings;
+  posts: Post[];
+};
+const { post, settings, posts } = Astro.props as Props;
 ---
 
 <section class="footer-cta">
@@ -16,9 +22,9 @@ const { post, settings, posts } = Astro.props;
 <aside class="read-more-wrap">
   <div class="read-more inner">
     {posts
-      .filter((p) => p.id !== post.id)
+      .filter((p: Post) => p.id !== post.id)
       .slice(0, 3)
-      .map((post) => <PostPreview post={post} settings={settings} />)}
+      .map((post: Post) => <PostPreview post={post} settings={settings} />)}
   </div>
 </aside>
 

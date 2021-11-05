@@ -94,5 +94,3 @@ export type Post = {
 };
 
 export type Page = Post;
-
-export function nothing() {}

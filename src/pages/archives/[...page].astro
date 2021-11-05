@@ -1,9 +1,19 @@
 ---
 import DefaultPageLayout from "$/layouts/default.astro";
-import PostPreviewList from "$/components/PostPreviewList.astro";
-import HeroContent from "$/components/HeroContent.astro";
-import Paginator from "$/components/Paginator.astro";
+import PostPreviewList from "$components/PostPreviewList.astro";
+import HeroContent from "$components/HeroContent.astro";
+import Paginator from "$components/Paginator.astro";
 import { getSettings, getAllPosts } from "$/utils/api";
+import type { Post } from "$/types.d.ts";
+export type Props = {
+  page: {
+    data: Post[];
+    url: {
+      prev?: string;
+      next?: string;
+    };
+  };
+};
 
 export async function getStaticPaths({ paginate }) {
   const { posts } = await getAllPosts({ include: "authors,tags" });
@@ -14,26 +24,26 @@ export async function getStaticPaths({ paginate }) {
 const { settings } = await getSettings();
 const title = settings.title;
 const description = settings.description;
-const { page } = Astro.props;
+const { page } = Astro.props as Props;
 ---
 
 <DefaultPageLayout
-  content={{ title, description }}
-  {settings}
+  content={{ title, description }} 
+  settings={settings}
   bodyClass={"home-template"}>
   <HeroContent
     mainTitle={"Archives"}
     description={"All the posts"}
     featureImg={settings.cover_image}
-    {settings}
+    settings={settings}
     addClass={"hero-cta bg-gradient"}>
     <h1 class="site-title" slot="title">Archives</h1>
   </HeroContent>
 
   <main id="site-main" class="site-main outer">
     <div class="inner posts">
-      <PostPreviewList posts={page.data} {settings} />
-      <Paginator {page} />
+      <PostPreviewList posts={page.data} settings={settings} />
+      <Paginator page={page} />
     </div>
   </main>
 </DefaultPageLayout>

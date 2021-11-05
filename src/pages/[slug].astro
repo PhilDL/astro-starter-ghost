@@ -1,7 +1,7 @@
 ---
 import DefaultPageLayout from "$/layouts/default.astro";
-import Page from "$/components/Page.astro";
-import Post from "$/components/Post.astro";
+import Page from "$components/Page.astro";
+import Post from "$components/Post.astro";
 import { getAllPosts, getAllPages, getSettings } from "$/utils/api";
 
 export async function getStaticPaths({ rss }) {
@@ -19,6 +19,7 @@ export async function getStaticPaths({ rss }) {
       link: item.url,
       pubDate: item.created_at,
     })),
+    dest: "feed.xml",
   });
   return posts.map((post) => ({
     params: { slug: post.slug },

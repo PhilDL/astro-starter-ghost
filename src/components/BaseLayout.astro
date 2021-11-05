@@ -1,5 +1,8 @@
 ---
-const { bodyClass = "" } = Astro.props;
+export type Props = {
+  bodyClass?: string;
+};
+const { bodyClass = "" } = Astro.props as Props;
 ---
 
 <body class={`${bodyClass}`}>
