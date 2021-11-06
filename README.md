@@ -57,3 +57,4 @@ VITE_GHOST_KEY=831b7314fa8ce1807e0b98dc34
 ```
 
 If you Deploy on Netlify, Vercel, etc you will have to set the same environement variables.
+
