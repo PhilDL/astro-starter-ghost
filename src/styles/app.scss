@@ -1,7 +1,8 @@
 /* Reset
 /* ---------------------------------------------------------- */
 
-@import "./reset.scss";
+@import "./reset";
+@import "./variables";
 
 /* 1. Global - Set up the things
 /* ---------------------------------------------------------- */
@@ -123,6 +124,43 @@
   }
   .error-message {
     padding-bottom: 14vw;
+  }
+}
+
+.author-template .posts {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr;
+  grid-gap: 4vmin;
+}
+
+.author-template .posts .post-feed {
+  grid-column: 2 / 4;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 900px) {
+  .author-template .posts .post-feed {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .author-template .posts {
+    grid-template-columns: 1fr;
+    grid-gap: 0;
+  }
+  .author-template .posts .post-feed {
+    grid-column: 1 / auto;
+  }
+  .author-profile {
+    padding-right: 0;
+  }
+  .author-profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 }
 

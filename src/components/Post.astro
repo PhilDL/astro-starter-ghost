@@ -12,7 +12,7 @@ const { post, settings, postClass, posts } = Astro.props as Props;
 ---
 
 <main id="site-main" class="site-main">
-  <article class={`article ${postClass}`}>
+  <article class={`article post ${postClass}`}>
     <PostHero {post} {settings} />
     <section class="gh-content gh-canvas">
       {post.html}
