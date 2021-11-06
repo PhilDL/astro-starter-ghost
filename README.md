@@ -16,16 +16,15 @@ Astro Next compatible: Currently using **astro@0.21.0-next.1***
 
 The routes are the same as a standard Ghost Blog so you can migrate to Astro easily.
 
-| Route   | Content    |
-| ------- | ---------- |
-| `/`  | Homepage with recents/features Blog Posts |
-| `/[slug]` | Post or Page        |
-| `/author/[slug]` | Author page with related posts        |
-| `/authors` | All the authors         |
-| `/tag[slug]` | Tag page with related posts         |
-| `/tags` | All the tags         |
-| `/archives/[...page]` | All the posts, paginated         |
-
+| Route                 | Content                                   |
+| --------------------- | ----------------------------------------- |
+| `/`                   | Homepage with recents/features Blog Posts |
+| `/[slug]`             | Post or Page                              |
+| `/author/[slug]`      | Author page with related posts            |
+| `/authors`            | All the authors                           |
+| `/tag[slug]`          | Tag page with related posts               |
+| `/tags`               | All the tags                              |
+| `/archives/[...page]` | All the posts, paginated                  |
 
 ### Ghost Casper theme and SCSS
 

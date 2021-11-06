@@ -32,7 +32,7 @@ const { params } = Astro.request;
   bodyClass={`author-template author-${author.slug}`}
   content={{ title: `Posts by author: ${params.author}`, description: `all of the articles we've posted and linked so far under the author: ${params.author}` }}
   {settings}>
-  <section class="outer">
+  <section class="outer author-template">
     <div class="inner posts">
       <header class="author-profile">
         <div class="author-profile-content">
@@ -78,9 +78,6 @@ const { params } = Astro.request;
 </DefaultPageLayout>
 
 <style lang="scss" global>
-  /* 8. Author Template
-/* ---------------------------------------------------------- */
-
   .author-template .posts {
     position: relative;
     height: 100%;

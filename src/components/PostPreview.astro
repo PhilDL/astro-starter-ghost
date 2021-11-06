@@ -1,6 +1,7 @@
 ---
 import { getGhostImgPath, formatDate } from "$/utils";
-import type { GhostSettings, Post, Tag, Author } from "$/types.d.ts";
+import AuthorList from "$components/AuthorList.astro";
+import type { GhostSettings, Post, Tag } from "$/types.d.ts";
 export type Props = {
   post: Post;
   settings: GhostSettings;
@@ -42,26 +43,14 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
     </a>
 
     <footer class="post-card-meta">
-      <ul class="author-list">
-        {post.authors.map((author: Author) => <li class="author-list-item">
-            {author.profile_image ? <a href={`/author/${author.slug}`} class="static-avatar">
-                <img class="author-profile-image" src={author.profile_image} alt={author.name} />
-              </a> : <a href={`/author/${author.slug}`} class="static-avatar author-profile-image">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <g fill="none" fill-rule="evenodd">
-                    <path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF" />
-                  </g>
-                </svg>
-              </a>}
-          </li>)}
-      </ul>
+      <AuthorList {post} {settings} />
       <div class="post-card-byline-content">
         <span>{post.primary_author.name}</span>
         <span class="post-card-byline-date"
           ><time datetime={formatDate(post.created_at)}
             >{formatDate(post.created_at)}</time>
           <span class="bull">&bull;</span>
-          {post.reading_time}</span>
+          {post.reading_time} min read</span>
       </div>
     </footer>
   </div>
@@ -69,7 +58,7 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
 
 <style lang="scss" global>
   @use "sass:color";
-
+  @import "/src/styles/variables";
   .post-card {
     position: relative;
     flex: 1 1 301px;
@@ -82,7 +71,7 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
 
   .post-card-excerpt {
     max-width: 56em;
-    color: color.scale(#738a94, $lightness: -8%);
+    color: color.scale($color-midgrey, $lightness: -8%);
   }
 
   .post-card-image-link {
@@ -95,7 +84,7 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
   .post-card-image {
     width: 100%;
     height: 200px;
-    background: var(--color-lightgrey) no-repeat center center;
+    background: $color-lightgrey no-repeat center center;
 
     object-fit: cover;
   }
@@ -103,7 +92,7 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
   .post-card-content-link {
     position: relative;
     display: block;
-    color: var(--color-darkgrey);
+    color: $color-darkgrey;
   }
 
   .post-card-content-link:hover {
@@ -162,12 +151,11 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
     padding: 0;
   }
 
-  .author-profile-image,
   .avatar-wrapper {
     display: block;
     width: 100%;
     height: 100%;
-    background: color-mod(var(--color-lightgrey) l(+10%));
+    background: color.scale($color-lightgrey, $lightness: +8%);
     border-radius: 100%;
 
     object-fit: cover;
@@ -176,21 +164,6 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
   .post-card-meta .profile-image-wrapper,
   .post-card-meta .avatar-wrapper {
     position: relative;
-  }
-
-  .author-list {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 0 0 4px;
-    padding: 0;
-    list-style: none;
-  }
-
-  .author-list-item {
-    position: relative;
-    flex-shrink: 0;
-    margin: 0;
-    padding: 0;
   }
 
   .static-avatar {
@@ -208,7 +181,7 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
     display: flex;
     flex-direction: column;
     margin: 0 0 0 8px;
-    color: color-mod(var(--color-midgrey) l(+10%));
+    color: color.scale($color-midgrey, $lightness: +10%);
     font-size: 1.4rem;
     line-height: 1.2em;
     font-weight: 400;
@@ -219,7 +192,7 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
   }
 
   .post-card-byline-content a {
-    color: color-mod(var(--color-darkgrey) l(+15%));
+    color: color.scale($color-darkgrey, $lightness: +15%);
     font-weight: 600;
   }
 
@@ -238,7 +211,7 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
     display: flex;
     flex-direction: column;
     margin-left: 5px;
-    color: color-mod(var(--color-midgrey) l(-10%));
+    color: color.scale($color-midgrey, $lightness: -10%);
     font-size: 1.3rem;
     line-height: 1.4em;
     font-weight: 500;

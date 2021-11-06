@@ -1,0 +1,62 @@
+---
+import { getGhostImgPath } from "$/utils";
+import type { GhostSettings, Post, Author } from "$/types.d.ts";
+export type Props = {
+  post: Post;
+  settings: GhostSettings;
+};
+const { post, settings } = Astro.props as Props;
+---
+
+<ul class="author-list">
+  {post.authors.map((author: Author) => <li class="author-list-item">
+      {author.profile_image ? <a href={`/author/${author.slug}`} class="author-avatar">
+          <img class="author-profile-image" src={getGhostImgPath(settings.url, author.profile_image, 100)} alt={author.name} />
+        </a> : <a href={`/author/${author.slug}`} class="author-avatar">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" fill-rule="evenodd">
+              <path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF" />
+            </g>
+          </svg>
+        </a>}
+    </li>)}
+</ul>
+
+<style lang="scss">
+  @use "sass:color";
+  @import "/src/styles/variables";
+  .author-avatar {
+    display: block;
+    overflow: hidden;
+    margin: 0 -4px;
+    width: 50px;
+    height: 50px;
+    border: #fff 2px solid;
+    border-radius: 100%;
+    transition: all 0.5s cubic-bezier(0.4, 0.01, 0.165, 0.99) 700ms;
+  }
+
+  .author-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 0 4px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .author-list-item {
+    position: relative;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .author-profile-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: color.scale($color-lightgrey, $lightness: +10%);
+    border-radius: 100%;
+    object-fit: cover;
+  }
+</style>
