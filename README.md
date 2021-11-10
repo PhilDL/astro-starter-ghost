@@ -10,7 +10,7 @@ A starter template to build super fast websites with [Ghost](https://ghost.org/)
 
 ### Using Astro @next
 
-Astro Next compatible: Currently using **astro@0.21.0-next.1***
+Astro Next compatible: Currently using **astro@0.21.0-next.2***
 
 ### Routes
 
@@ -52,9 +52,8 @@ You will need to create a new integration in your Ghost backend and note the Gho
 Then, for local developpement rename the `.env.test` to `.env` and fill it with the Ghost URL and API Key:
 
 ```
-VITE_GHOST_URL=https://astro-starter.codingdodo.com
-VITE_GHOST_KEY=831b7314fa8ce1807e0b98dc34
+PUBLIC_GHOST_URL=https://astro-starter.codingdodo.com
+PUBLIC_GHOST_KEY=831b7314fa8ce1807e0b98dc34
 ```
 
 If you Deploy on Netlify, Vercel, etc you will have to set the same environement variables.
-

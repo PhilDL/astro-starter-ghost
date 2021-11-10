@@ -1,7 +1,7 @@
 import type { GhostSettings, Author, Tag, Post, Page } from "$/types";
 
-const ghostUrl = import.meta.env.VITE_GHOST_URL;
-const ghostApiKey = import.meta.env.VITE_GHOST_KEY;
+const ghostUrl = import.meta.env.PUBLIC_GHOST_URL;
+const ghostApiKey = import.meta.env.PUBLIC_GHOST_KEY;
 
 export const get = async ({ endpoint = "", include = "", filter = "" }) => {
   let url = `${ghostUrl}/ghost/api/v3/content/${endpoint}/?key=${ghostApiKey}`;
