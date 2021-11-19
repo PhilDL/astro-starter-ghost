@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@snowpack/plugin-dotenv": "^2.2.0",
-    "astro": "0.21.0-next.7",
+    "astro": "0.21.0-next.9",
     "prettier": "^2.4.1",
     "prettier-plugin-astro": "^0.0.9",
     "typescript": "^4.3.5"
