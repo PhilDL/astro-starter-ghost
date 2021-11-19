@@ -10,7 +10,7 @@ A starter template to build super fast websites with [Ghost](https://ghost.org/)
 
 ### Using Astro @next
 
-Astro Next compatible: Currently using **astro@0.21.0-next.7***
+Astro Next compatible: Currently using **astro@0.21.0-next.10***
 
 ### Routes
 
