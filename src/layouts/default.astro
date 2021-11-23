@@ -8,16 +8,10 @@ export type Props = {
     description: string;
   };
   bodyClass?: string;
-  mainClass?: string;
   settings: GhostSettings;
 };
 
-const {
-  content,
-  settings,
-  bodyClass = "",
-  mainClass = "",
-} = Astro.props as Props;
+const { content, settings, bodyClass = "" } = Astro.props as Props;
 const ghostAccentColor = settings.accent_color;
 ---
 
@@ -29,9 +23,11 @@ const ghostAccentColor = settings.accent_color;
       description={content.description}
       {settings} />
   </head>
-  <MainLayout {settings} {bodyClass} {mainClass}>
-    <slot />
-  </MainLayout>
+  <body class={bodyClass}>
+    <MainLayout {settings}>
+      <slot />
+    </MainLayout>
+  </body>
 </html>
 
 <style
