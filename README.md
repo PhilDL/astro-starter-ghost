@@ -8,9 +8,9 @@ A starter template to build super fast websites with [Ghost](https://ghost.org/)
 
 ## Features
 
-### Using Latest Astro
+### Using Astro latest versions
 
-Astro **0.21.2** compatible
+Currently using **astro@0.21.12***
 
 ### Routes
 
