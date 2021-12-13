@@ -1,22 +1,20 @@
 ---
-import BaseLayout from "$components/BaseLayout.astro";
 import Header from "$components/Header.astro";
 import Footer from "$components/Footer.astro";
 import type { GhostSettings } from "$/types.d.ts";
 export type Props = {
   settings: GhostSettings;
-  bodyClass?: string;
 };
-const { settings, bodyClass = "" } = Astro.props as Props;
+const { settings } = Astro.props as Props;
 ---
 
-<BaseLayout bodyClass={bodyClass}>
+<div class="viewport">
   <Header {settings} />
   <div class="site-content">
     <slot />
   </div>
   <Footer {settings} />
-</BaseLayout>
+</div>
 
 <style>
   .content {
