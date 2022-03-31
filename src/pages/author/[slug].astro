@@ -25,12 +25,13 @@ export async function getStaticPaths({}) {
 }
 
 const { posts, settings, author } = Astro.props;
-const { params } = Astro.request;
+const title = `Posts by author: ${author.name}`;
+const description = `All of the articles we've posted and linked so far under the author: ${author.name}`;
 ---
 
 <DefaultPageLayout
   bodyClass={`author-template author-${author.slug}`}
-  content={{ title: `Posts by author: ${params.author}`, description: `all of the articles we've posted and linked so far under the author: ${params.author}` }}
+  content={{ title, description}}
   {settings}>
   <section class="outer author-template">
     <div class="inner posts">

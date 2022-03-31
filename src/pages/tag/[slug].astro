@@ -25,12 +25,13 @@ export async function getStaticPaths({}) {
 }
 
 const { posts, settings, tag } = Astro.props;
-const { params } = Astro.request;
+const title = `Posts by Tag: ${tag.name}`;
+const description = `all of the articles we've posted and linked so far under the tag: ${tag.name}`;
 ---
 
 <DefaultPageLayout
   bodyClass={`tag-template tag-${tag.slug}`}
-  content={{ title: `Posts by Tag: ${params.tag}`, description: `all of the articles we've posted and linked so far under the tag: ${params.tag}` }}
+  content={{ title, description }}
   {settings}>
   <main id="site-main" class="site-main outer">
     <div class="inner posts">
