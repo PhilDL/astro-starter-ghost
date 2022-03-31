@@ -23,7 +23,7 @@ const { page, settings, pageClass } = Astro.props as Props;
 
     <section class="gh-content gh-canvas">
       <h1 class="article-title">{page.title}</h1>
-      {page.html}
+      <Fragment set:html={page.html} />
     </section>
   </article>
 </main>

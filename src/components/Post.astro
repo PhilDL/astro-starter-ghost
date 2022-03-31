@@ -15,7 +15,7 @@ const { post, settings, postClass, posts } = Astro.props as Props;
   <article class={`article post ${postClass}`}>
     <PostHero {post} {settings} />
     <section class="gh-content gh-canvas">
-      {post.html}
+      <Fragment set:html={post.html} />
     </section>
   </article>
   <PostFooter {post} {settings} {posts} />
