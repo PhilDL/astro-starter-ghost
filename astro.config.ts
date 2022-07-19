@@ -11,6 +11,7 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  integrations: [],
   vite: {
     resolve: {
       alias: {
