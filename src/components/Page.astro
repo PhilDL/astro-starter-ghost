@@ -1,6 +1,6 @@
 ---
 import FeatureImage from "$components/FeatureImage.astro";
-import type { GhostSettings, Page } from "$/types.d.ts";
+import type { GhostSettings, Page } from "$/types";
 export type Props = {
   page: Page;
   settings: GhostSettings;
@@ -12,23 +12,24 @@ const { page, settings, pageClass } = Astro.props as Props;
 <main id="site-main" class="site-main">
   <article class={`article page ${pageClass}`}>
     <header class="article-header gh-canvas">
-      {page.feature_image && 
-      <FeatureImage
-        image={page.feature_image}
-        alt={page.feature_image_alt ? page.feature_image_alt : page.title}
-        caption={page.feature_image_caption}
-        {settings} />
-        }
+      {page.feature_image && (
+        <FeatureImage
+          image={page.feature_image}
+          alt={page.feature_image_alt ? page.feature_image_alt : page.title}
+          caption={page.feature_image_caption}
+          settings={settings}
+        />
+      )}
     </header>
 
     <section class="gh-content gh-canvas">
       <h1 class="article-title">{page.title}</h1>
-      {page.html}
+      <div set:html={page.html}></div>
     </section>
   </article>
 </main>
 
-<style lang="scss" global>
+<style lang="scss" is:global>
   .article {
     padding: 8vmin 0;
     word-break: break-word;

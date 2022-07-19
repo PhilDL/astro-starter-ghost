@@ -1,19 +1,16 @@
 {
   "compilerOptions": {
+    // Enable top-level await, and other modern ESM features.
+    "target": "ESNext",
+    "module": "ESNext",
+    // Enable node-style module resolution, for things like npm package imports.
     "moduleResolution": "node",
-    "module": "es2020",
-    "lib": ["es2020", "dom"],
-    "target": "es2019",
-    "importsNotUsedAsValues": "error",
-    "isolatedModules": true,
+    // Enable JSON imports.
     "resolveJsonModule": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
-    "allowJs": true,
-    "checkJs": true,
+    // Enable stricter transpilation for better output.
+    "isolatedModules": true,
+    // Add type definitions for our Astro runtime.
+    "types": ["astro/client"],
     "paths": {
       "$/*": ["./src/*"],
       "$components/*": ["./src/components/*"]

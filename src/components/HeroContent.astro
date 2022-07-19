@@ -1,6 +1,6 @@
 ---
 import { getGhostImgPath } from "$/utils";
-import type { GhostSettings } from "$/types.d.ts";
+import type { GhostSettings } from "$/types";
 export type Props = {
   featureImg?: string;
   mainTitle?: string;
@@ -19,29 +19,39 @@ const {
 
 <div class="site-header-content">
   {featureImg && (
-        <img class="site-header-cover"
-            data-srcset={`
+    <img
+      class="site-header-cover"
+      data-srcset={`
             ${getGhostImgPath(settings.url, featureImg, 300)} 300w,
             ${getGhostImgPath(settings.url, featureImg, 600)} 600w
             ${getGhostImgPath(settings.url, featureImg, 1000)} 1000w
             ${getGhostImgPath(settings.url, featureImg, 2000)} 2000w
             `}
-            srcset={`
+      srcset={`
             ${getGhostImgPath(settings.url, featureImg, 300)} 300w,
             ${getGhostImgPath(settings.url, featureImg, 600)} 600w
             ${getGhostImgPath(settings.url, featureImg, 1000)} 1000w
             ${getGhostImgPath(settings.url, featureImg, 2000)} 2000w
             `}
-            data-sizes="auto" 
-            data-src={getGhostImgPath(settings.url, featureImg, 2000)}
-            src={getGhostImgPath(settings.url, featureImg, 2000)} 
-            alt={mainTitle} sizes="100vw"
-        >
-    )}
+      data-sizes="auto"
+      data-src={getGhostImgPath(settings.url, featureImg, 2000)}
+      src={getGhostImgPath(settings.url, featureImg, 2000)}
+      alt={mainTitle}
+      sizes="100vw"
+    />
+  )}
 
   <slot name="title">
     <h1 class="site-title">
-      {settings.logo ? <img class="site-logo" src={getGhostImgPath(settings.url, settings.logo, 300)} alt={settings.title} /> : settings.title}
+      {settings.logo ? (
+        <img
+          class="site-logo"
+          src={getGhostImgPath(settings.url, settings.logo, 300)}
+          alt={settings.title}
+        />
+      ) : (
+        settings.title
+      )}
     </h1>
   </slot>
   <p>{description}</p>

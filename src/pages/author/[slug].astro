@@ -2,6 +2,7 @@
 import DefaultPageLayout from "$/layouts/default.astro";
 import PostPreviewList from "$components/PostPreviewList.astro";
 import { getAllPosts, getAllAuthors, getSettings } from "$/utils/api";
+import { Debug } from 'astro/components';
 import { twitter, facebook } from "@tryghost/social-urls";
 
 export async function getStaticPaths({}) {
@@ -25,146 +26,15 @@ export async function getStaticPaths({}) {
 }
 
 const { posts, settings, author } = Astro.props;
-const { params } = Astro.request;
+const { params } = Astro.params;
 ---
 
 <DefaultPageLayout
   bodyClass={`author-template author-${author.slug}`}
-  content={{ title: `Posts by author: ${params.author}`, description: `all of the articles we've posted and linked so far under the author: ${params.author}` }}
-  {settings}>
-  <section class="outer author-template">
-    <div class="inner posts">
-      <header class="author-profile">
-        <div class="author-profile-content">
-          {author.profile_image ? <img class="author-profile-pic" src={author.profile_image} alt={author.name} /> : <span class="author-profile-pic">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" fill-rule="evenodd">
-                  <path d="M3.513 18.998C4.749 15.504 8.082 13 12 13s7.251 2.504 8.487 5.998C18.47 21.442 15.417 23 12 23s-6.47-1.558-8.487-4.002zM12 12c2.21 0 4-2.79 4-5s-1.79-4-4-4-4 1.79-4 4 1.79 5 4 5z" fill="#FFF" />
-                </g>
-              </svg>
-            </span>}
-          <h1>{author.name}</h1>
-          <p>
-            {author.bio ? author.bio : author.count.posts > 0 ? `${author.count.posts.length} Posts` : "No posts"}
-          </p>
-
-          <div class="author-profile-meta">
-            {author.location && <div class="author-profile-location">
-                📍 {author.location}
-              </div>}
-
-            {author.website && <span>
-                <a class="author-profile-social-link" href={author.website} target="_blank" rel="noopener">
-                  {author.website}
-                </a>
-              </span>}
-            {author.twitter && <span>
-                <a class="author-profile-social-link" href={twitter(author.twitter)} target="_blank" rel="noopener">
-                  {author.twitter}
-                </a>
-              </span>}
-            {author.facebook && <span>
-                <a class="author-profile-social-link" href={facebook(author.facebook)} target="_blank" rel="noopener">
-                  {author.facebook}
-                </a>
-              </span>}
-          </div>
-        </div>
-      </header>
-
-      <PostPreviewList {posts} {settings} />
-    </div>
-  </section>
+  settings={settings}
+>
+  <main id="site-main" class="site-main outer">
+    <div class="inner author">Author page Not implemented yet, author:</div>
+    <Debug {author} />
+  </main>
 </DefaultPageLayout>
-
-<style lang="scss" global>
-  .author-template .posts {
-    position: relative;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 200px 1fr 1fr;
-    grid-gap: 4vmin;
-  }
-
-  .author-template .posts .post-feed {
-    grid-column: 2 / 4;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .author-profile {
-    padding: 4vmin 0;
-  }
-
-  .author-profile-content {
-    height: auto;
-    position: sticky;
-    top: 4vmin;
-    font-size: 1.4rem;
-    line-height: 1.4em;
-  }
-
-  .author-profile-pic {
-    display: block;
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    margin: 0 0 2rem;
-    background: color-mod(var(--color-lightgrey) l(+10%));
-    border-radius: 50%;
-  }
-
-  .author-profile h1 {
-    margin: 0 0 0.3em;
-    font-size: 2rem;
-  }
-
-  .author-profile p {
-    margin: 0 0 1.5em;
-    color: color-mod(var(--color-midgrey) l(-8%));
-  }
-
-  .author-profile-location {
-    margin: 0 0 1.5em;
-    font-weight: 700;
-  }
-
-  .author-profile-social-link {
-    display: block;
-    padding: 0 0 5px;
-    font-size: 1.3rem;
-    color: color-mod(var(--color-midgrey) l(-8%));
-    text-overflow: ellipsis;
-    overflow: hidden;
-    max-width: 100%;
-    white-space: nowrap;
-  }
-
-  .author-profile-social-link:hover {
-    color: var(--color-darkgrey);
-  }
-
-  @media (max-width: 900px) {
-    .author-template .posts .post-feed {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 650px) {
-    .author-template .posts {
-      grid-template-columns: 1fr;
-      grid-gap: 0;
-    }
-    .author-template .posts .post-feed {
-      grid-column: 1 / auto;
-    }
-    .author-profile {
-      padding-right: 0;
-    }
-    .author-profile-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-  }
-</style>

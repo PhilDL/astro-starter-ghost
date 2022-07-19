@@ -1,7 +1,7 @@
 ---
 import BaseHead from "$components/BaseHead.astro";
 import MainLayout from "$components/MainLayout.astro";
-import type { GhostSettings } from "$/types.d.ts";
+import type { GhostSettings } from "$/types";
 export type Props = {
   content?: {
     title: string;
@@ -19,42 +19,44 @@ const ghostAccentColor = settings.accent_color;
 <html lang="en" data-color-scheme="light">
   <head>
     <BaseHead
-      title={content.title ? `${settings.title} | ${content.title}` : settings.title}
-      description={content.description}
-      {settings} />
+      title={content?.title
+        ? `${settings.title} | ${content.title}`
+        : settings.title}
+      description={content?.description ?? "Description"}
+      settings={settings}
+    />
   </head>
   <body class={bodyClass}>
-    <MainLayout {settings}>
-      <slot />
+    <MainLayout settings={settings}>
+      <slot></slot>
     </MainLayout>
+    <style
+      lang="scss"
+      is:global
+      define:vars={{ "ghost-accent-color": ghostAccentColor }}
+    >
+      @import "../styles/reset.scss";
+      @import "../styles/app.scss";
+      @mixin mq-sm {
+        @media only screen and (min-width: 36em) {
+          @content;
+        }
+      }
+      @mixin mq-md {
+        @media only screen and (min-width: 48em) {
+          @content;
+        }
+      }
+      @mixin mq-lg {
+        @media only screen and (min-width: 62em) {
+          @content;
+        }
+      }
+      @mixin mq-xl {
+        @media only screen and (min-width: 75em) {
+          @content;
+        }
+      }
+    </style>
   </body>
 </html>
-
-<style
-  lang="scss"
-  global
-  define:vars={{ "ghost-accent-color": ghostAccentColor }}
->
-  @import "../styles/reset.scss";
-  @import "../styles/app.scss";
-  @mixin mq-sm {
-    @media only screen and (min-width: 36em) {
-      @content;
-    }
-  }
-  @mixin mq-md {
-    @media only screen and (min-width: 48em) {
-      @content;
-    }
-  }
-  @mixin mq-lg {
-    @media only screen and (min-width: 62em) {
-      @content;
-    }
-  }
-  @mixin mq-xl {
-    @media only screen and (min-width: 75em) {
-      @content;
-    }
-  }
-</style>
