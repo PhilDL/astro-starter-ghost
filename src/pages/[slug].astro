@@ -4,23 +4,11 @@ import Page from "$components/Page.astro";
 import Post from "$components/Post.astro";
 import { getAllPosts, getAllPages, getSettings } from "$/utils/api";
 
-export async function getStaticPaths({ rss }) {
+export async function getStaticPaths() {
   let { posts } = await getAllPosts({ include: "authors,tags" });
   let { pages } = await getAllPages({ include: "authors,tags" });
   posts = posts.concat(pages);
   const { settings } = await getSettings();
-  rss({
-    title: settings.title,
-    description: settings.description,
-    customData: `<language>en-us</language>`,
-    items: posts.map((item) => ({
-      title: item.title,
-      description: item.excerpt,
-      link: item.url,
-      pubDate: item.created_at,
-    })),
-    dest: "feed.xml",
-  });
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post, posts, settings },
@@ -33,13 +21,14 @@ const bodyClass = `post-template ${postClass}`;
 
 <DefaultPageLayout
   content={{ title: post.title, description: post.description }}
-  {settings}
-  {bodyClass}>
-  {post.page ? 
-  <Page page={post} {settings} pageClass={postClass} />
-  :
-  <Post {post} {settings} {postClass} {posts} />
-  }
+  settings={settings}
+  bodyClass={bodyClass}
+>
+  {post.page ? (
+    <Page page={post} settings={settings} pageClass={postClass} />
+  ) : (
+    <Post post={post} settings={settings} postClass={postClass} posts={posts} />
+  )}
 </DefaultPageLayout>
 
 <style lang="scss">

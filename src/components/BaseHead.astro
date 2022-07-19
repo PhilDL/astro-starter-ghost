@@ -1,5 +1,5 @@
 ---
-import type { GhostSettings } from "$/types.d.ts";
+import type { GhostSettings } from "$/types";
 export type Props = {
   title: string;
   description: string;
@@ -15,7 +15,8 @@ const { description, permalink, image, settings, title } = Astro.props as Props;
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
   href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-  rel="stylesheet" />
+  rel="stylesheet"
+/>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -50,18 +51,24 @@ const { description, permalink, image, settings, title } = Astro.props as Props;
 <link
   rel="preload"
   href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css"
-  as="style" />
+  as="style"
+/>
 <link
   rel="preload"
   href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"
-  as="script" />
+  as="script"
+/>
 <link
   rel="preload stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css"
   as="style"
-  crossorigin />
+  onload="this.onload=null;this.rel='stylesheet'"
+  crossorigin
+/>
 <script
   async
   defer
   src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"
-></script>
+>
+
+</script>

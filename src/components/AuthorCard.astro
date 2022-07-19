@@ -1,6 +1,6 @@
 ---
 import { getGhostImgPath } from "$/utils";
-import type { GhostSettings, Author } from "$/types.d.ts";
+import type { GhostSettings, Author } from "$/types";
 export type Props = {
   author: Author;
   wide?: boolean;
@@ -11,7 +11,6 @@ export type Props = {
 const {
   author,
   wide = false,
-  addClass = "",
   settings,
   showCover = true,
 } = Astro.props as Props;
@@ -19,24 +18,46 @@ const {
 
 <div class={`card author-card author-${author.slug} ${wide ? "wide" : ""}`}>
   <figure class="author-card-cover">
-    {author.cover_image && showCover && <img class="lazyautosizes lazyloaded" data-srcset={`
+    {author.cover_image && showCover && (
+      <img
+        class="lazyautosizes lazyloaded"
+        data-srcset={`
             ${getGhostImgPath(settings.url, author.cover_image, 300)} 300w,
             ${getGhostImgPath(settings.url, author.cover_image, 600)} 600w
-          `} srcset={`
+          `}
+        srcset={`
             ${getGhostImgPath(settings.url, author.cover_image, 300)} 300w,
             ${getGhostImgPath(settings.url, author.cover_image, 600)} 600w
-        `} data-sizes="auto" data-src={getGhostImgPath(settings.url, author.cover_image, 300)} src={getGhostImgPath(settings.url, author.cover_image, 300)} alt={author.name} sizes="316px" />}
+        `}
+        data-sizes="auto"
+        data-src={getGhostImgPath(settings.url, author.cover_image, 300)}
+        src={getGhostImgPath(settings.url, author.cover_image, 300)}
+        alt={author.name}
+        sizes="316px"
+      />
+    )}
   </figure>
 
-  {author.profile_image && <a href={`/author/${author.slug}`} class="author-card-media">
-      <img class="author-card-img" data-srcset={`
+  {author.profile_image && (
+    <a href={`/author/${author.slug}`} class="author-card-media">
+      <img
+        class="author-card-img"
+        data-srcset={`
             ${getGhostImgPath(settings.url, author.profile_image, 100)} 100w,
             ${getGhostImgPath(settings.url, author.profile_image, 300)} 300w
-          `} srcset={`
+          `}
+        srcset={`
             ${getGhostImgPath(settings.url, author.profile_image, 100)} 100w,
             ${getGhostImgPath(settings.url, author.profile_image, 300)} 300w
-        `} data-sizes="auto" data-src={getGhostImgPath(settings.url, author.profile_image, 300)} src={getGhostImgPath(settings.url, author.profile_image, 300)} alt={author.name} sizes="316px" />
-    </a>}
+        `}
+        data-sizes="auto"
+        data-src={getGhostImgPath(settings.url, author.profile_image, 300)}
+        src={getGhostImgPath(settings.url, author.profile_image, 300)}
+        alt={author.name}
+        sizes="316px"
+      />
+    </a>
+  )}
   <div class="author-card-content">
     <div class="author-card-name">
       <a href={`/author/${author.slug}`}>{author.name}</a>
@@ -45,9 +66,11 @@ const {
     {author.bio && <div class="author-card-descr">{author.bio}</div>}
 
     <div class="author-card-details">
-      {author.count && author.count.posts && <div>
+      {author.count && author.count.posts && (
+        <div>
           {author.count.posts > 0 ? `${author.count.posts} posts` : "No posts"}
-        </div>}
+        </div>
+      )}
     </div>
   </div>
 </div>

@@ -10,7 +10,7 @@ const { tags } = await getAllTags({ include: "count.posts" });
 const { settings } = await getSettings();
 ---
 
-<DefaultPageLayout content={{ title, description }} {settings}>
+<DefaultPageLayout content={{ title, description }} settings={settings}>
   <section class="outer">
     <div class="inner posts">
       <h1>
@@ -22,9 +22,11 @@ const { settings } = await getSettings();
       <div class="tag-feed">
         {tags
           .filter((tag) => !tag.slug.startsWith("hash-"))
-          .map((tag) => <article class="post-card ">
+          .map((tag) => (
+            <article class="post-card ">
               <TagCard tag={tag} settings={settings} />
-            </article>)}
+            </article>
+          ))}
       </div>
     </div>
   </section>

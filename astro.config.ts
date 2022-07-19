@@ -1,14 +1,16 @@
-// @ts-check
-export default /** @type {import('astro').AstroUserConfig} */ {
-  buildOptions: {
-    site: "https://mysite.com", // Your public domain, e.g.: https://my-site.dev/. Used to generate sitemaps and canonical URLs.
-    sitemap: true, // Generate sitemap (set to "false" to disable)
+import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
+
+// https://astro.build/config
+export default defineConfig({
+  site: "https://mysite.com",
+  // Your public domain, e.g.: https://my-site.dev/. Used to generate sitemaps and canonical URLs.
+  build: {
+    //
   },
-  devOptions: {
-    // port: 3000,         // The port to run the dev server on.
-    // tailwindConfig: './tailwind.config.js',
+  server: {
+    port: 3000,
   },
-  integrations: [],
   vite: {
     resolve: {
       alias: {
@@ -17,4 +19,5 @@ export default /** @type {import('astro').AstroUserConfig} */ {
       },
     },
   },
-};
+  integrations: [sitemap()],
+});

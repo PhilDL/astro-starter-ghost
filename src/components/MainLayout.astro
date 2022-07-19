@@ -1,7 +1,7 @@
 ---
 import Header from "$components/Header.astro";
 import Footer from "$components/Footer.astro";
-import type { GhostSettings } from "$/types.d.ts";
+import type { GhostSettings } from "$/types";
 export type Props = {
   settings: GhostSettings;
 };
@@ -9,11 +9,11 @@ const { settings } = Astro.props as Props;
 ---
 
 <div class="viewport">
-  <Header {settings} />
+  <Header settings={settings} />
   <div class="site-content">
-    <slot />
+    <slot></slot>
   </div>
-  <Footer {settings} />
+  <Footer settings={settings} />
 </div>
 
 <style>

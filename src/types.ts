@@ -91,6 +91,7 @@ export type Post = {
   primary_tag?: Tag;
   url: string;
   excerpt: string;
+  reading_time?: string;
 };
 
 export type Page = Post;

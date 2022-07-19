@@ -1,7 +1,7 @@
 ---
 import { getGhostImgPath, formatDate } from "$/utils";
 import AuthorList from "$components/AuthorList.astro";
-import type { GhostSettings, Post, Tag } from "$/types.d.ts";
+import type { GhostSettings, Post, Tag } from "$/types";
 export type Props = {
   post: Post;
   settings: GhostSettings;
@@ -14,7 +14,10 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
 <article
   class={`post-card ${post.tags
     .map((tag: Tag) => `tag-${tag.slug}`)
-    .join(" ")} ${isHome && post.feature_image && index == 0 ? "post-card-large" : ""}`}>
+    .join(" ")} ${
+    isHome && post.feature_image && index == 0 ? "post-card-large" : ""
+  }`}
+>
   <a class="post-card-image-link" href={`/${post.slug}`}>
     <img
       class="post-card-image"
@@ -27,14 +30,15 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
       src={`${getGhostImgPath(settings.url, post.feature_image, 600)}`}
       alt={post.title}
       sizes="(max-width: 1000px) 400px, 800px"
-      loading="lazy" />
+      loading="lazy"
+    />
   </a>
   <div class="post-card-content">
     <a class="post-card-content-link" href={`/${post.slug}`}>
       <header class="post-card-header">
-        {post.primary_tag && <div class="post-card-primary-tag">
-            {post.primary_tag.name}
-          </div>}
+        {post.primary_tag && (
+          <div class="post-card-primary-tag">{post.primary_tag.name}</div>
+        )}
         <h2 class="post-card-title">{post.title}</h2>
       </header>
       <div class="post-card-excerpt">
@@ -43,20 +47,22 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
     </a>
 
     <footer class="post-card-meta">
-      <AuthorList {post} {settings} />
+      <AuthorList post={post} settings={settings} />
       <div class="post-card-byline-content">
         <span>{post.primary_author.name}</span>
         <span class="post-card-byline-date"
           ><time datetime={formatDate(post.created_at)}
-            >{formatDate(post.created_at)}</time>
+            >{formatDate(post.created_at)}
+          </time>
           <span class="bull">&bull;</span>
-          {post.reading_time} min read</span>
+          {post.reading_time} min read
+        </span>
       </div>
     </footer>
   </div>
 </article>
 
-<style lang="scss" global>
+<style lang="scss" is:global>
   @use "sass:color";
   @import "/src/styles/variables";
   .post-card {

@@ -1,6 +1,6 @@
 ---
 import { getGhostImgPath } from "$/utils";
-import type { GhostSettings } from "$/types.d.ts";
+import type { GhostSettings } from "$/types";
 export type Props = {
   image: string;
   alt?: string;
@@ -20,9 +20,11 @@ const { image, alt, caption = "", settings } = Astro.props as Props;
         `}
     sizes="(min-width: 1400px) 1400px, 92vw"
     src={getGhostImgPath(settings.url, image, 2000)}
-    {alt} />
+    {alt}
+  />
   {caption && <figcaption>{caption}</figcaption>}
 </figure>
 
 <style lang="scss">
+
 </style>
