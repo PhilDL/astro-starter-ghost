@@ -1,7 +1,7 @@
 export const getGhostImgPath = (
   baseUrl: string,
   imgUrl: string,
-  width: number = 0
+  width = 0
 ): string => {
   if (!imgUrl.startsWith(baseUrl)) {
     return imgUrl;
@@ -18,7 +18,7 @@ export const truncate = (input: string, size: number): string =>
   input.length > size ? `${input.substring(0, size)}...` : input;
 
 export const formatDate = (dateInput: string): string => {
-  let dateObject = new Date(dateInput);
+  const dateObject = new Date(dateInput);
   return dateObject.toDateString();
 };
 

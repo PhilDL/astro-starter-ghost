@@ -10,13 +10,15 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint ."
   },
   "prettier": {},
   "devDependencies": {
     "@astrojs/renderer-svelte": "0.5.2",
     "@astrojs/sitemap": "^0.2.6",
     "@snowpack/plugin-dotenv": "^2.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
     "astro": "^1.0.0-beta.73",
     "eslint": "^8.20.0",
