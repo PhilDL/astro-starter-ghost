@@ -11,7 +11,9 @@ export const get = async ({ endpoint = "", include = "", filter = "" }) => {
   if (filter) {
     url += `&filter=${filter}`;
   }
-  return await fetch(url).then((response) => response.json());
+  return await fetch(url).then((response) => {
+    return response.json();
+  });
 };
 
 export const getAllAuthors = async ({
