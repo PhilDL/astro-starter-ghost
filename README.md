@@ -10,7 +10,7 @@ A starter template to build super fast websites with [Ghost](https://ghost.org/)
 
 ### Using Astro latest versions
 
-Currently using **astro@v1.0.0-rc.7***
+Currently using **astro@1.0.1***
 
 ### Routes
 
