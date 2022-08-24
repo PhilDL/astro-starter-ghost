@@ -10,6 +10,8 @@
     // Enable stricter transpilation for better output.
     "isolatedModules": true,
     // Add type definitions for our Astro runtime.
+    // Astro will directly run your TypeScript code, no transpilation needed.
+    "noEmit": true,
     "types": ["astro/client"],
     "paths": {
       "$/*": ["./src/*"],

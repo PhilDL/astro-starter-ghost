@@ -22,7 +22,10 @@ export const formatDate = (dateInput: string): string => {
   return dateObject.toDateString();
 };
 
-export const uniqWith = (arr: Array<any>, fn: Function): Array<any> =>
+export const uniqWith = <T>(
+  arr: Array<T>,
+  fn: (element: T, step: T) => number
+): Array<T> =>
   arr.filter(
     (element, index) => arr.findIndex((step) => fn(element, step)) === index
   );
