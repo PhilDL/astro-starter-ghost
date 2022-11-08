@@ -16,26 +16,28 @@ const { tag, addClass = "", settings } = Astro.props;
   class={`tag-card ${addClass ? addClass : ""}`}
   style={tag.accent_color ? `--color-accent:${tag.accent_color}` : ""}
 >
-  {tag.feature_image && (
-    <div class="tag-card-media">
-      <img
-        class="tag-card-img"
-        data-srcset={`
+  {
+    tag.feature_image && (
+      <div class="tag-card-media">
+        <img
+          class="tag-card-img"
+          data-srcset={`
           ${getGhostImgPath(settings.url, tag.feature_image, 100)} 100w,
           ${getGhostImgPath(settings.url, tag.feature_image, 300)} 300w
         `}
-        srcset={`
+          srcset={`
           ${getGhostImgPath(settings.url, tag.feature_image, 100)} 100w,
           ${getGhostImgPath(settings.url, tag.feature_image, 300)} 300w
         `}
-        data-sizes="auto"
-        data-src={getGhostImgPath(settings.url, tag.feature_image, 300)}
-        src={getGhostImgPath(settings.url, tag.feature_image, 300)}
-        alt={tag.name}
-        sizes="200px"
-      />
-    </div>
-  )}
+          data-sizes="auto"
+          data-src={getGhostImgPath(settings.url, tag.feature_image, 300)}
+          src={getGhostImgPath(settings.url, tag.feature_image, 300)}
+          alt={tag.name}
+          sizes="200px"
+        />
+      </div>
+    )
+  }
   <div class="tag-card-content">
     <h4 class="tag-card-name">{tag.name}</h4>
     {tag.count && <span class="tag-card-count">{tag.count.posts}+ Posts</span>}

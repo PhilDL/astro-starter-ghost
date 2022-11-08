@@ -16,22 +16,22 @@
   "prettier": {},
   "devDependencies": {
     "@astrojs/renderer-svelte": "0.5.2",
-    "@astrojs/rss": "^1.0.0",
+    "@astrojs/rss": "^1.0.3",
     "@astrojs/sitemap": "^1.0.0",
     "@snowpack/plugin-dotenv": "^2.2.0",
-    "@tryghost/content-api": "^1.11.1",
+    "@tryghost/content-api": "^1.11.4",
     "@tryghost/social-urls": "^0.1.33",
-    "@typescript-eslint/eslint-plugin": "^5.33.0",
-    "@typescript-eslint/parser": "^5.33.0",
-    "astro": "^1.0.5",
-    "eslint": "^8.22.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "astro": "^1.6.4",
+    "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-astro": "^0.17.1",
+    "eslint-plugin-astro": "^0.21.0",
     "prettier": "^2.7.1",
-    "prettier-plugin-astro": "^0.5.0",
-    "sass": "^1.54.4",
-    "typescript": "^4.7.4",
-    "vite": "^3.0.7"
+    "prettier-plugin-astro": "^0.7.0",
+    "sass": "^1.56.0",
+    "typescript": "^4.8.4",
+    "vite": "^3.2.3"
   },
   "dependencies": {}
 }

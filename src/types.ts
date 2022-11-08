@@ -43,6 +43,9 @@ export type Author = {
   meta_title: string;
   meta_description: string;
   url: string;
+  count: {
+    posts: number;
+  };
 };
 
 export type Tag = {
@@ -55,6 +58,10 @@ export type Tag = {
   meta_title: string;
   meta_description: string;
   url: string;
+  accent_color?: string;
+  count: {
+    posts: number;
+  };
 };
 
 export type Post = {
