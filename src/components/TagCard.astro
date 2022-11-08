@@ -1,6 +1,6 @@
 ---
 import { getGhostImgPath } from "$/utils";
-import type { GhostSettings, Tag } from "$/types.d.ts";
+import type { GhostSettings, Tag } from "$/types";
 export type Props = {
   tag: Tag;
   addClass?: string;
@@ -14,10 +14,12 @@ const { tag, addClass = "", settings } = Astro.props;
   title={tag.name}
   aria-label={tag.name}
   class={`tag-card ${addClass ? addClass : ""}`}
-  style={tag.accent_color ? `--color-accent:${tag.accent_color}` : ""}>
+  style={tag.accent_color ? `--color-accent:${tag.accent_color}` : ""}
+>
   {tag.feature_image && (
-  <div class="tag-card-media">
-      <img class="tag-card-img" 
+    <div class="tag-card-media">
+      <img
+        class="tag-card-img"
         data-srcset={`
           ${getGhostImgPath(settings.url, tag.feature_image, 100)} 100w,
           ${getGhostImgPath(settings.url, tag.feature_image, 300)} 300w
@@ -26,12 +28,13 @@ const { tag, addClass = "", settings } = Astro.props;
           ${getGhostImgPath(settings.url, tag.feature_image, 100)} 100w,
           ${getGhostImgPath(settings.url, tag.feature_image, 300)} 300w
         `}
-        data-sizes="auto" 
+        data-sizes="auto"
         data-src={getGhostImgPath(settings.url, tag.feature_image, 300)}
-        src={getGhostImgPath(settings.url, tag.feature_image, 300)} 
-        alt={tag.name} sizes="200px"
-      >
-    </div>  
+        src={getGhostImgPath(settings.url, tag.feature_image, 300)}
+        alt={tag.name}
+        sizes="200px"
+      />
+    </div>
   )}
   <div class="tag-card-content">
     <h4 class="tag-card-name">{tag.name}</h4>

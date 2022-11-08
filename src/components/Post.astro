@@ -1,7 +1,7 @@
 ---
 import PostHero from "$components/PostHero.astro";
 import PostFooter from "$components/PostFooter.astro";
-import type { GhostSettings, Post } from "$/types.d.ts";
+import type { GhostSettings, Post } from "$/types";
 export type Props = {
   post: Post;
   settings: GhostSettings;
@@ -13,15 +13,15 @@ const { post, settings, postClass, posts } = Astro.props as Props;
 
 <main id="site-main" class="site-main">
   <article class={`article post ${postClass}`}>
-    <PostHero {post} {settings} />
+    <PostHero post={post} settings={settings} />
     <section class="gh-content gh-canvas">
-      {post.html}
+      <Fragment set:html={post.html} />
     </section>
   </article>
-  <PostFooter {post} {settings} {posts} />
+  <PostFooter post={post} settings={settings} posts={posts} />
 </main>
 
-<style lang="scss" global>
+<style lang="scss" is:global>
   .article {
     padding: 8vmin 0;
     word-break: break-word;

@@ -9,7 +9,7 @@ const { authors } = await getAllAuthors({ include: "count.posts" });
 const { settings } = await getSettings();
 ---
 
-<DefaultPageLayout content={{ title, description }} {settings}>
+<DefaultPageLayout content={{ title, description }} settings={settings}>
   <section class="outer">
     <div class="inner posts">
       <h1>
@@ -19,9 +19,11 @@ const { settings } = await getSettings();
         Collection of Tags
       </div>
       <div class="author-feed">
-        {authors.map((author) => <article class="post-card ">
+        {authors.map((author) => (
+          <article class="post-card ">
             <AuthorCard author={author} settings={settings} />
-          </article>)}
+          </article>
+        ))}
       </div>
     </div>
   </section>

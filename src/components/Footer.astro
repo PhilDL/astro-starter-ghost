@@ -1,5 +1,5 @@
 ---
-import type { GhostSettings } from "$/types.d.ts";
+import type { GhostSettings } from "$/types";
 export type Props = {
   settings: GhostSettings;
 };
@@ -12,15 +12,20 @@ const { settings } = Astro.props as Props;
       <a href="/">{settings.title}</a> &copy; 2021
     </section>
     <nav class="site-footer-nav">
-      {settings.secondary_navigation.length > 0 && <ul class="nav secondary">
-          {settings.secondary_navigation.map(({ label, url }) => <li class="">
+      {settings.secondary_navigation.length > 0 && (
+        <ul class="nav secondary">
+          {settings.secondary_navigation.map(({ label, url }) => (
+            <li class="">
               <a href={url}>{label}</a>
-            </li>)}
-        </ul>}
+            </li>
+          ))}
+        </ul>
+      )}
     </nav>
     <div>
       <a href="https://ghost.org/" target="_blank" rel="noopener"
-        >Powered by Ghost</a>
+        >Powered by Ghost
+      </a>
     </div>
   </div>
 </footer>
