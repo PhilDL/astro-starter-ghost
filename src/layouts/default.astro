@@ -15,7 +15,6 @@ const { content, settings, bodyClass = "" } = Astro.props as Props;
 const ghostAccentColor = settings.accent_color;
 ---
 
-<!DOCTYPE html>
 <html lang="en" data-color-scheme="light">
   <head>
     <BaseHead
@@ -28,7 +27,7 @@ const ghostAccentColor = settings.accent_color;
   </head>
   <body class={bodyClass}>
     <MainLayout settings={settings}>
-      <slot></slot>
+      <slot />
     </MainLayout>
     <style
       lang="scss"
