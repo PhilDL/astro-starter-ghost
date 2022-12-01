@@ -3,6 +3,7 @@ export const getGhostImgPath = (
   imgUrl: string,
   width = 0
 ): string => {
+  if (!imgUrl) return "";
   if (!imgUrl.startsWith(baseUrl)) {
     return imgUrl;
   }

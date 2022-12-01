@@ -20,13 +20,15 @@ const { settings } = await getSettings();
         Collection of Tags
       </div>
       <div class="tag-feed">
-        {tags
-          .filter((tag) => !tag.slug.startsWith("hash-"))
-          .map((tag) => (
-            <article class="post-card ">
-              <TagCard tag={tag} settings={settings} />
-            </article>
-          ))}
+        {
+          tags
+            .filter((tag) => tag.slug && !tag.slug.startsWith("hash-"))
+            .map((tag) => (
+              <article class="post-card ">
+                <TagCard tag={tag} settings={settings} />
+              </article>
+            ))
+        }
       </div>
     </div>
   </section>
