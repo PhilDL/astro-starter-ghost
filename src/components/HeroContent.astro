@@ -1,10 +1,10 @@
 ---
-import { getGhostImgPath } from "$/utils";
-import type { GhostSettings } from "$/types";
+import { getGhostImgPath } from "~/utils";
+import type { Settings } from "@ts-ghost/content-api";
 export type Props = {
   featureImg?: string;
   mainTitle?: string;
-  settings: GhostSettings;
+  settings: Settings;
   description?: string;
   addClass?: string;
 };

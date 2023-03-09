@@ -1,10 +1,10 @@
 ---
-import { getGhostImgPath, formatDate } from "$/utils";
-import AuthorList from "$components/AuthorList.astro";
-import type { GhostSettings, Post, Tag } from "$/types";
+import { getGhostImgPath, formatDate } from "~/utils";
+import AuthorList from "~/components/AuthorList.astro";
+import type { Settings, Post, Tag } from "@ts-ghost/content-api";
 export type Props = {
   post: Post;
-  settings: GhostSettings;
+  settings: Settings;
   index?: number;
   isHome?: boolean;
 };
@@ -12,7 +12,7 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
 ---
 
 <article
-  class={`post-card ${post.tags
+  class={`post-card ${post.tags && post.tags
     .map((tag: Tag) => `tag-${tag.slug}`)
     .join(" ")} ${
     isHome && post.feature_image && index == 0 ? "post-card-large" : ""
@@ -22,12 +22,12 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
     <img
       class="post-card-image"
       srcset={`
-        ${getGhostImgPath(settings.url, post.feature_image, 300)} 300w, 
-        ${getGhostImgPath(settings.url, post.feature_image, 600)} 600w
-        ${getGhostImgPath(settings.url, post.feature_image, 1000)} 1000w
-        ${getGhostImgPath(settings.url, post.feature_image, 2000)} 2000w
+        ${getGhostImgPath(settings.url, post.feature_image || "", 300)} 300w, 
+        ${getGhostImgPath(settings.url, post.feature_image || "", 600)} 600w
+        ${getGhostImgPath(settings.url, post.feature_image || "", 1000)} 1000w
+        ${getGhostImgPath(settings.url, post.feature_image || "", 2000)} 2000w
       `}
-      src={`${getGhostImgPath(settings.url, post.feature_image, 600)}`}
+      src={`${getGhostImgPath(settings.url, post.feature_image || "", 600)}`}
       alt={post.title}
       sizes="(max-width: 1000px) 400px, 800px"
       loading="lazy"
@@ -49,7 +49,7 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
     <footer class="post-card-meta">
       <AuthorList post={post} settings={settings} />
       <div class="post-card-byline-content">
-        <span>{post.primary_author.name}</span>
+        <span>{post.primary_author?.name ?? ""}</span>
         <span class="post-card-byline-date"
           ><time datetime={formatDate(post.created_at)}
             >{formatDate(post.created_at)}

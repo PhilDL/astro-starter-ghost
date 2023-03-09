@@ -1,17 +1,19 @@
 ---
-import DefaultPageLayout from "$/layouts/default.astro";
-import PostPreviewList from "$components/PostPreviewList.astro";
-import { getAllPosts, getAllAuthors, getSettings } from "$/utils/api";
-import { twitter, facebook } from "@tryghost/social-urls";
+import type { InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
+import DefaultPageLayout from "~/layouts/default.astro";
+import PostPreviewList from "~/components/PostPreviewList.astro";
+import { getAllPosts, getAllAuthors, getSettings } from "~/utils/api";
+import { twitter, facebook } from "@ts-ghost/content-api";
+import invariant from "tiny-invariant";
 
 export async function getStaticPaths() {
-  const { posts } = await getAllPosts({ include: "authors,tags" });
-  const { authors } = await getAllAuthors({ include: "count.posts" });
-  const { settings } = await getSettings();
+  const posts = await getAllPosts();
+  const { authors } = await getAllAuthors();
+  const settings = await getSettings();
 
   return authors.map((author) => {
     const filteredPosts = posts.filter((post) =>
-      post.authors.map((author) => author.slug).includes(author.slug)
+      post.authors?.map((author) => author.slug).includes(author.slug)
     );
     return {
       params: { slug: author.slug },
@@ -24,7 +26,11 @@ export async function getStaticPaths() {
   });
 }
 
+export type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+export type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
 const { posts, settings, author } = Astro.props;
+invariant(settings, "Settings are required");
 const title = `Posts by author: ${author.name}`;
 const description = `All of the articles we've posted and linked so far under the author: ${author.name}`;
 ---
@@ -60,8 +66,8 @@ const description = `All of the articles we've posted and linked so far under th
           <p>
             {author.bio
               ? author.bio
-              : author.count.posts > 0
-              ? `${author.count.posts.length} Posts`
+              : author.count?.posts || 0 > 0
+              ? `${author.count?.posts} Posts`
               : "No posts"}
           </p>
 

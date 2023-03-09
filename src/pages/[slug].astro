@@ -1,36 +1,50 @@
 ---
-import DefaultPageLayout from "$/layouts/default.astro";
-import Page from "$components/Page.astro";
-import Post from "$components/Post.astro";
-import { getAllPosts, getAllPages, getSettings } from "$/utils/api";
+import type { InferGetStaticPropsType } from 'astro';
+import DefaultPageLayout from "~/layouts/default.astro";
+import Page from "~/components/Page.astro";
+import Post from "~/components/Post.astro";
+import { fetchAllBlogPosts, fetchAllPages, fetchSettings } from "~/utils/ghost-helpers";
+import { TSGhostContentAPI } from "@ts-ghost/content-api";
+import invariant from 'tiny-invariant';
 
 export async function getStaticPaths() {
-  let { posts } = await getAllPosts({ include: "authors,tags" });
-  let { pages } = await getAllPages({ include: "authors,tags" });
-  posts = posts.concat(pages);
-  const { settings } = await getSettings();
-  return posts.map((post) => ({
+  const ghostUrl = import.meta.env.PUBLIC_GHOST_URL;
+  const ghostApiKey = import.meta.env.PUBLIC_GHOST_KEY;
+  const api = new TSGhostContentAPI(ghostUrl, ghostApiKey, "v5.0");
+  const [posts, pages, settings] = await Promise.all([fetchAllBlogPosts(api), await fetchAllPages(api), await fetchSettings(api)]);
+  const allPosts = [...posts, ...pages];
+  return allPosts.map((post) => ({
     params: { slug: post.slug },
     props: { post, posts, settings },
   }));
 }
-const { post, posts, settings } = Astro.props;
-const postClass = post.tags.map((tag) => "tag-" + tag.slug).join(" ");
+
+export type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const {post, posts, settings} = Astro.props as Props;
+invariant(settings, "Settings are required");
+const postClass = post.tags?.map((tag) => "tag-" + tag.slug).join(" ");
 const bodyClass = `post-template ${postClass}`;
 ---
 
 <DefaultPageLayout
-  content={{ title: post.title, description: post.description }}
+  content={{ title: post.title, description: post.excerpt }}
   settings={settings}
   bodyClass={bodyClass}
 >
-  {post.page ? (
+  {
+    post.primary_author ? (
+    <Post
+        post={post}
+        settings={settings}
+        postClass={postClass}
+        posts={posts}
+      />
+      
+    ) : (
     <Page page={post} settings={settings} pageClass={postClass} />
-  ) : (
-    <Post post={post} settings={settings} postClass={postClass} posts={posts} />
-  )}
+    )
+  }
 </DefaultPageLayout>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
