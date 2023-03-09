@@ -3,15 +3,11 @@ import type { InferGetStaticPropsType } from 'astro';
 import DefaultPageLayout from "~/layouts/default.astro";
 import Page from "~/components/Page.astro";
 import Post from "~/components/Post.astro";
-import { fetchAllBlogPosts, fetchAllPages, fetchSettings } from "~/utils/ghost-helpers";
-import { TSGhostContentAPI } from "@ts-ghost/content-api";
+import { getSettings, getAllPages, getAllPosts } from "~/utils/api";
 import invariant from 'tiny-invariant';
 
 export async function getStaticPaths() {
-  const ghostUrl = import.meta.env.PUBLIC_GHOST_URL;
-  const ghostApiKey = import.meta.env.PUBLIC_GHOST_KEY;
-  const api = new TSGhostContentAPI(ghostUrl, ghostApiKey, "v5.0");
-  const [posts, pages, settings] = await Promise.all([fetchAllBlogPosts(api), await fetchAllPages(api), await fetchSettings(api)]);
+  const [posts, pages, settings] = await Promise.all([getAllPosts(), await getAllPages(), await getSettings()]);
   const allPosts = [...posts, ...pages];
   return allPosts.map((post) => ({
     params: { slug: post.slug },
