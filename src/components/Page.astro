@@ -1,9 +1,9 @@
 ---
-import FeatureImage from "$components/FeatureImage.astro";
-import type { GhostSettings, Page } from "$/types";
+import FeatureImage from "~/components/FeatureImage.astro";
+import type { Settings, Page } from "@ts-ghost/content-api";
 export type Props = {
   page: Page;
-  settings: GhostSettings;
+  settings: Settings;
   pageClass?: string;
 };
 const { page, settings, pageClass } = Astro.props as Props;
@@ -16,7 +16,7 @@ const { page, settings, pageClass } = Astro.props as Props;
         <FeatureImage
           image={page.feature_image}
           alt={page.feature_image_alt ? page.feature_image_alt : page.title}
-          caption={page.feature_image_caption}
+          caption={page.feature_image_caption || ""}
           settings={settings}
         />
       )}

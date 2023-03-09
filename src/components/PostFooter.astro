@@ -1,9 +1,9 @@
 ---
-import PostPreview from "$components/PostPreview.astro";
-import type { GhostSettings, Post } from "$/types";
+import PostPreview from "~/components/PostPreview.astro";
+import type { Settings, Post } from "@ts-ghost/content-api";
 export type Props = {
   post: Post;
-  settings: GhostSettings;
+  settings: Settings;
   posts: Post[];
 };
 const { post, settings, posts } = Astro.props as Props;

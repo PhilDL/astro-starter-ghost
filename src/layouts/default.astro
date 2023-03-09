@@ -1,14 +1,14 @@
 ---
-import BaseHead from "$components/BaseHead.astro";
-import MainLayout from "$components/MainLayout.astro";
-import type { GhostSettings } from "$/types";
+import type { Settings } from "@ts-ghost/content-api";
+import BaseHead from "~/components/BaseHead.astro";
+import MainLayout from "~/components/MainLayout.astro";
 export type Props = {
   content?: {
     title: string;
     description: string;
   };
   bodyClass?: string;
-  settings: GhostSettings;
+  settings: Settings;
 };
 
 const { content, settings, bodyClass = "" } = Astro.props as Props;

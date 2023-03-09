@@ -1,8 +1,8 @@
 ---
-import { twitter, facebook } from "@tryghost/social-urls";
-import type { GhostSettings } from "$/types";
+import { twitter, facebook } from "@ts-ghost/content-api";
+import type { Settings } from "@ts-ghost/content-api";
 export type Props = {
-  settings: GhostSettings;
+  settings: Settings;
 };
 const { settings } = Astro.props as Props;
 ---

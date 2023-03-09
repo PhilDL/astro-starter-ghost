@@ -1,9 +1,9 @@
 ---
-import Header from "$components/Header.astro";
-import Footer from "$components/Footer.astro";
-import type { GhostSettings } from "$/types";
+import Header from "~/components/Header.astro";
+import Footer from "~/components/Footer.astro";
+import type { Settings } from "@ts-ghost/content-api";
 export type Props = {
-  settings: GhostSettings;
+  settings: Settings;
 };
 const { settings } = Astro.props as Props;
 ---
