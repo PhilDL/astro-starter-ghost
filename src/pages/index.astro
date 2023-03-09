@@ -1,10 +1,12 @@
 ---
-import DefaultPageLayout from "$/layouts/default.astro";
-import PostPreviewList from "$/components/PostPreviewList.astro";
-import HeroContent from "$/components/HeroContent.astro";
-import { getSettings, getAllPosts } from "$/utils/api";
-const { posts } = await getAllPosts({ include: "authors,tags" });
-const { settings } = await getSettings();
+import DefaultPageLayout from "~/layouts/default.astro";
+import PostPreviewList from "~/components/PostPreviewList.astro";
+import HeroContent from "~/components/HeroContent.astro";
+import { getPosts, getSettings } from "~/utils/api";
+import invariant from 'tiny-invariant';
+const { posts } = await getPosts();
+const settings = await getSettings();
+invariant(settings, 'Settings not found');
 const title = settings.title;
 const description = settings.description;
 ---
@@ -17,7 +19,7 @@ const description = settings.description;
   <HeroContent
     mainTitle={settings.title}
     description={settings.description}
-    featureImg={settings.cover_image}
+    featureImg={settings?.cover_image || ""}
     settings={settings}
     addClass={"hero-cta bg-gradient"}
   />

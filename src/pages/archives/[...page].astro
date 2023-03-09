@@ -1,27 +1,27 @@
 ---
-import DefaultPageLayout from "$/layouts/default.astro";
-import PostPreviewList from "$components/PostPreviewList.astro";
-import HeroContent from "$components/HeroContent.astro";
-import Paginator from "$components/Paginator.astro";
-import { getSettings, getAllPosts } from "$/utils/api";
-import type { Post } from "$/types";
-export type Props = {
-  page: {
-    data: Post[];
-    url: {
-      prev?: string;
-      next?: string;
-    };
-  };
-};
+import type { GetStaticPathsOptions, Page } from 'astro';
+import type { Post } from "@ts-ghost/content-api";
+import invariant from "tiny-invariant";
+import DefaultPageLayout from "~/layouts/default.astro";
+import PostPreviewList from "~/components/PostPreviewList.astro";
+import HeroContent from "~/components/HeroContent.astro";
+import Paginator from "~/components/Paginator.astro";
+import { getSettings, getAllPosts } from "~/utils/api";
 
-export async function getStaticPaths({ paginate }) {
-  const { posts } = await getAllPosts({ include: "authors,tags" });
+export async function getStaticPaths({ paginate }:GetStaticPathsOptions) {
+  const posts = await getAllPosts();
   return paginate(posts, {
     pageSize: 5,
   });
 }
-const { settings } = await getSettings();
+
+export type Props = {
+  page: Page<Post>
+};
+
+const settings = await getSettings();
+invariant(settings, "Settings are required");
+
 const title = settings.title;
 const description = settings.description;
 const { page } = Astro.props as Props;
@@ -35,7 +35,7 @@ const { page } = Astro.props as Props;
   <HeroContent
     mainTitle={"Archives"}
     description={"All the posts"}
-    featureImg={settings.cover_image}
+    featureImg={settings.cover_image || ""}
     settings={settings}
     addClass={"hero-cta bg-gradient"}
   >

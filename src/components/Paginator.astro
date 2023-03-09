@@ -1,5 +1,6 @@
 ---
-const { page } = Astro.props;
+import type { Page } from 'astro';
+const { page } = Astro.props as {page: Page};
 ---
 
 <div class="page__actions">

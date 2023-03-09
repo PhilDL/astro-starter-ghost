@@ -1,12 +1,14 @@
 ---
-import DefaultPageLayout from "$/layouts/default.astro";
-import AuthorCard from "$components/AuthorCard.astro";
-import { getAllAuthors, getSettings } from "$/utils/api";
+import DefaultPageLayout from "~/layouts/default.astro";
+import AuthorCard from "~/components/AuthorCard.astro";
+import { getAllAuthors, getSettings } from "~/utils/api";
+import invariant from "tiny-invariant";
 
 let title = "All Authors";
 let description = "All the authors";
-const { authors } = await getAllAuthors({ include: "count.posts" });
-const { settings } = await getSettings();
+const { authors } = await getAllAuthors();
+const settings = await getSettings();
+invariant(settings, 'Settings not found');
 ---
 
 <DefaultPageLayout content={{ title, description }} settings={settings}>

@@ -1,11 +1,11 @@
 ---
-import FeatureImage from "$components/FeatureImage.astro";
-import AuthorList from "$components/AuthorList.astro";
-import { formatDate } from "$/utils";
-import type { GhostSettings, Post, Author } from "$/types";
+import FeatureImage from "~/components/FeatureImage.astro";
+import AuthorList from "~/components/AuthorList.astro";
+import { formatDate } from "~/utils";
+import type { Settings, Post } from "@ts-ghost/content-api";
 export type Props = {
   post: Post;
-  settings: GhostSettings;
+  settings: Settings;
 };
 const { post, settings } = Astro.props as Props;
 ---
@@ -23,9 +23,11 @@ const { post, settings } = Astro.props as Props;
     <section class="article-byline-content">
       <AuthorList post={post} settings={settings} />
       <div class="article-byline-meta">
-        <h4 class="author-name">
-          {post.authors.map((author: Author) => author.name).join(", ")}
+        { post.authors && post.authors.length > 1 && (
+          <h4 class="author-name">
+          {post.authors.map((author) => author.name).join(", ")}
         </h4>
+        )}
         <div class="byline-meta-content">
           <time class="byline-meta-date" datetime={formatDate(post.created_at)}
             >{formatDate(post.created_at)}
@@ -42,7 +44,7 @@ const { post, settings } = Astro.props as Props;
     <FeatureImage
       image={post.feature_image}
       alt={post.feature_image_alt ? post.feature_image_alt : post.title}
-      caption={post.feature_image_caption}
+      caption={post.feature_image_caption || "" }
       settings={settings}
     />
   )}

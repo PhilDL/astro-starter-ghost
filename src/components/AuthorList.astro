@@ -1,15 +1,15 @@
 ---
-import { getGhostImgPath } from "$/utils";
-import type { GhostSettings, Post, Author } from "$/types";
+import { getGhostImgPath } from "~/utils";
+import type { Settings, Post } from "@ts-ghost/content-api";
 export type Props = {
   post: Post;
-  settings: GhostSettings;
+  settings: Settings;
 };
 const { post, settings } = Astro.props as Props;
 ---
 
 <ul class="author-list">
-  {post.authors.map((author: Author) => (
+  {post.authors && post.authors.map((author) => (
     <li class="author-list-item">
       {author.profile_image ? (
         <a href={`/author/${author.slug}`} class="author-avatar">

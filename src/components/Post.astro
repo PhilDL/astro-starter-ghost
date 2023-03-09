@@ -1,14 +1,16 @@
 ---
-import PostHero from "$components/PostHero.astro";
-import PostFooter from "$components/PostFooter.astro";
-import type { GhostSettings, Post } from "$/types";
+import PostHero from "~/components/PostHero.astro";
+import PostFooter from "~/components/PostFooter.astro";
+import invariant from "tiny-invariant";
+import type {Post, Settings } from "@ts-ghost/content-api";
 export type Props = {
   post: Post;
-  settings: GhostSettings;
+  settings: Settings;
   postClass?: string;
   posts: Post[];
 };
 const { post, settings, postClass, posts } = Astro.props as Props;
+invariant(settings, "Settings not found");
 ---
 
 <main id="site-main" class="site-main">

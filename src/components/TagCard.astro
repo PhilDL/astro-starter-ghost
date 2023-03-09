@@ -1,10 +1,10 @@
 ---
-import { getGhostImgPath } from "$/utils";
-import type { GhostSettings, Tag } from "$/types";
+import { getGhostImgPath } from "~/utils";
+import type { Settings, Tag } from "@ts-ghost/content-api";
 export type Props = {
   tag: Tag;
   addClass?: string;
-  settings: GhostSettings;
+  settings: Settings;
 };
 const { tag, addClass = "", settings } = Astro.props;
 ---

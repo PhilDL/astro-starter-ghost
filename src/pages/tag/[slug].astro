@@ -1,17 +1,19 @@
 ---
-import DefaultPageLayout from "$/layouts/default.astro";
-import PostPreview from "$components/PostPreview.astro";
-import { getAllPosts, getAllTags, getSettings } from "$/utils/api";
-import { getGhostImgPath } from "$/utils";
+import type { InferGetStaticParamsType, InferGetStaticPropsType } from 'astro';
+import DefaultPageLayout from "~/layouts/default.astro";
+import PostPreview from "~/components/PostPreview.astro";
+import { getAllPosts, getAllTags, getSettings } from "~/utils/api";
+import { getGhostImgPath } from "~/utils";
+import invariant from "tiny-invariant";
 
 export async function getStaticPaths() {
-  const { posts } = await getAllPosts({ include: "authors,tags" });
-  const { tags } = await getAllTags({ include: "count.posts" });
-  const { settings } = await getSettings();
+  const posts = await getAllPosts();
+  const { tags } = await getAllTags();
+  const settings = await getSettings();
 
   return tags.map((tag) => {
     const filteredPosts = posts.filter((post) =>
-      post.tags.map((tag) => tag.slug).includes(tag.slug)
+      post.tags?.map((tag) => tag.slug).includes(tag.slug)
     );
     return {
       params: { slug: tag.slug },
@@ -24,7 +26,11 @@ export async function getStaticPaths() {
   });
 }
 
+export type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+export type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
 const { posts, settings, tag } = Astro.props;
+invariant(settings, 'Settings not found');
 const title = `Posts by Tag: ${tag.name}`;
 const description = `all of the articles we've posted and linked so far under the tag: ${tag.name}`;
 ---
@@ -32,7 +38,7 @@ const description = `all of the articles we've posted and linked so far under th
 <DefaultPageLayout
   bodyClass={`tag-template tag-${tag.slug}`}
   content={{ title, description }}
-  {settings}
+  settings={settings}
 >
   <main id="site-main" class="site-main outer">
     <div class="inner posts">
@@ -64,7 +70,7 @@ const description = `all of the articles we've posted and linked so far under th
                           )} 2000w`}
                 sizes="(max-width: 1000px) 400px, 800px"
                 src={getGhostImgPath(settings.url, tag.feature_image, 600)}
-                alt={tag.title}
+                alt={tag.name}
                 loading="lazy"
               />
             </div>
@@ -79,8 +85,8 @@ const description = `all of the articles we've posted and linked so far under th
                 <p>
                   {tag.description
                     ? tag.description
-                    : `A collection of ${tag.count.posts} Post${
-                        tag.count.posts > 1 ? "s" : ""
+                    : `A collection of ${tag.count?.posts || 0 } Post${
+                        tag.count?.posts ?? 0 > 1 ? "s" : ""
                       }`}
                 </p>
               </div>

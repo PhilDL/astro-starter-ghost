@@ -8,7 +8,7 @@ export const getGhostImgPath = (
     return imgUrl;
   }
   const relativePath = imgUrl.substring(`${baseUrl}/content/images`.length);
-  const cleanedBaseUrl = baseUrl.replace(/\/$/, "");
+  const cleanedBaseUrl = baseUrl.replace(/\/~/, "");
   if (width && width > 0) {
     return `${cleanedBaseUrl}/content/images/size/w${width}/${relativePath}`;
   }
