@@ -16,7 +16,7 @@ const { post, settings } = Astro.props as Props;
       <a href={`/tag/${post.primary_tag.slug}`}>{post.primary_tag.name}</a>
     </section>
   )}
-  <h1 class="article-title">{post.title}</h1>
+  <h1 class="article-title" transition:name={post.title}>{post.title}</h1>
 
   {post.custom_excerpt && <p class="article-excerpt">{post.custom_excerpt}</p>}
   <div class="article-byline">
@@ -46,6 +46,7 @@ const { post, settings } = Astro.props as Props;
       alt={post.feature_image_alt ? post.feature_image_alt : post.title}
       caption={post.feature_image_caption || "" }
       settings={settings}
+      transitionName={`img-${post.title}`}
     />
   )}
 </header>

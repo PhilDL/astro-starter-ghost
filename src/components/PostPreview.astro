@@ -31,6 +31,7 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
       alt={post.title}
       sizes="(max-width: 1000px) 400px, 800px"
       loading="lazy"
+      transition:name={`img-${post.title}`}
     />
   </a>
   <div class="post-card-content">
@@ -39,7 +40,7 @@ const { post, settings, index, isHome = false } = Astro.props as Props;
         {post.primary_tag && (
           <div class="post-card-primary-tag">{post.primary_tag.name}</div>
         )}
-        <h2 class="post-card-title">{post.title}</h2>
+        <h2 class="post-card-title" transition:name={post.title}>{post.title}</h2>
       </header>
       <div class="post-card-excerpt">
         <p>{post.excerpt}</p>

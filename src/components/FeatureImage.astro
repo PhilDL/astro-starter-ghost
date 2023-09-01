@@ -6,8 +6,9 @@ export type Props = {
   alt?: string;
   caption?: string;
   settings: Settings;
+  transitionName?: string;
 };
-const { image, alt, caption = "", settings } = Astro.props as Props;
+const { image, alt, caption = "", settings, transitionName } = Astro.props as Props;
 ---
 
 <figure class="article-image">
@@ -21,6 +22,7 @@ const { image, alt, caption = "", settings } = Astro.props as Props;
     sizes="(min-width: 1400px) 1400px, 92vw"
     src={getGhostImgPath(settings.url, image, 2000)}
     alt={alt}
+    transition:name={transitionName}
   />
   {caption && <figcaption>{caption}</figcaption>}
 </figure>
