@@ -7,15 +7,12 @@ const ghostApiKey = import.meta.env.PUBLIC_GHOST_KEY;
 export const getAllAuthors = async () => {
   const api = new TSGhostContentAPI(ghostUrl, ghostApiKey, "v5.0");
   const results = await api.authors
-    .browse({
-      output: {
-        include: {
-          "count.posts": true,
-        },
-      },
+    .browse()
+    .include({
+      "count.posts": true,
     })
     .fetch();
-  if (results.status === "error") {
+  if (!results.success) {
     throw new Error(results.errors.map((e) => e.message).join(", "));
   }
   return {
@@ -27,16 +24,13 @@ export const getAllAuthors = async () => {
 export const getPosts = async () => {
   const api = new TSGhostContentAPI(ghostUrl, ghostApiKey, "v5.0");
   const results = await api.posts
-    .browse({
-      output: {
-        include: {
-          authors: true,
-          tags: true,
-        },
-      },
+    .browse()
+    .include({
+      authors: true,
+      tags: true,
     })
     .fetch();
-  if (results.status === "error") {
+  if (!results.success) {
     throw new Error(results.errors.map((e) => e.message).join(", "));
   }
   return {
@@ -49,19 +43,16 @@ export const getAllPosts = async () => {
   const api = new TSGhostContentAPI(ghostUrl, ghostApiKey, "v5.0");
   const posts: Post[] = [];
   let cursor = await api.posts
-    .browse({
-      output: {
-        include: {
-          authors: true,
-          tags: true,
-        },
-      },
+    .browse()
+    .include({
+      authors: true,
+      tags: true,
     })
     .paginate();
-  if (cursor.current.status === "success") posts.push(...cursor.current.data);
+  if (cursor.current.success) posts.push(...cursor.current.data);
   while (cursor.next) {
     cursor = await cursor.next.paginate();
-    if (cursor.current.status === "success") posts.push(...cursor.current.data);
+    if (cursor.current.success) posts.push(...cursor.current.data);
   }
   return posts;
 };
@@ -70,19 +61,16 @@ export const getAllPages = async () => {
   const api = new TSGhostContentAPI(ghostUrl, ghostApiKey, "v5.0");
   const pages: Page[] = [];
   let cursor = await api.pages
-    .browse({
-      output: {
-        include: {
-          authors: true,
-          tags: true,
-        },
-      },
+    .browse()
+    .include({
+      authors: true,
+      tags: true,
     })
     .paginate();
-  if (cursor.current.status === "success") pages.push(...cursor.current.data);
+  if (cursor.current.success) pages.push(...cursor.current.data);
   while (cursor.next) {
     cursor = await cursor.next.paginate();
-    if (cursor.current.status === "success") pages.push(...cursor.current.data);
+    if (cursor.current.success) pages.push(...cursor.current.data);
   }
   return pages;
 };
@@ -90,7 +78,7 @@ export const getAllPages = async () => {
 export const getSettings = async () => {
   const api = new TSGhostContentAPI(ghostUrl, ghostApiKey, "v5.0");
   const res = await api.settings.fetch();
-  if (res.status === "success") {
+  if (res.success) {
     return res.data;
   }
   return null;
@@ -102,15 +90,12 @@ export type Settings = NonNullable<Awaited<ReturnType<typeof getSettings>>>;
 export const getAllTags = async () => {
   const api = new TSGhostContentAPI(ghostUrl, ghostApiKey, "v5.0");
   const results = await api.tags
-    .browse({
-      output: {
-        include: {
-          "count.posts": true,
-        },
-      },
+    .browse()
+    .include({
+      "count.posts": true,
     })
     .fetch();
-  if (results.status === "error") {
+  if (!results.success) {
     throw new Error(results.errors.map((e) => e.message).join(", "));
   }
   return {

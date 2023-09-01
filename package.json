@@ -17,22 +17,21 @@
   "prettier": {},
   "devDependencies": {
     "@astrojs/renderer-svelte": "0.5.2",
-    "@astrojs/rss": "^2.2.0",
-    "@astrojs/sitemap": "^1.2.0",
+    "@astrojs/rss": "^3.0.0",
+    "@astrojs/sitemap": "^3.0.0",
     "@snowpack/plugin-dotenv": "^2.2.0",
-    "@typescript-eslint/eslint-plugin": "^5.54.1",
-    "@typescript-eslint/parser": "^5.54.1",
-    "@ts-ghost/content-api": "^0.1.0",
-    "astro": "^2.1.2",
-    "eslint": "^8.33.0",
-    "eslint-config-prettier": "^8.7.0",
-    "eslint-plugin-astro": "^0.23.0",
-    "prettier": "^2.8.4",
-    "prettier-plugin-astro": "^0.8.0",
-    "sass": "^1.58.0",
+    "@ts-ghost/content-api": "^4.0.7",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "astro": "^3.0.5",
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-astro": "^0.29.0",
+    "prettier": "^3.0.3",
+    "prettier-plugin-astro": "^0.12.0",
+    "sass": "^1.66.1",
     "tiny-invariant": "^1.3.1",
-    "typescript": "^4.9.5",
-    "vite": "^4.1.1"
-  },
-  "dependencies": {}
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9"
+  }
 }
