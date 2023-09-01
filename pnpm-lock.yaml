@@ -18,8 +18,8 @@ devDependencies:
     specifier: ^2.2.0
     version: 2.2.0
   '@ts-ghost/content-api':
-    specifier: ^4.0.7
-    version: 4.0.7
+    specifier: ^4.0.8
+    version: 4.0.8
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.5.0
     version: 6.5.0(@typescript-eslint/parser@6.5.0)(eslint@8.48.0)(typescript@5.2.2)
@@ -945,8 +945,8 @@ packages:
       - supports-color
     dev: true
 
-  /@ts-ghost/content-api@4.0.7:
-    resolution: {integrity: sha512-4dY0FtsEE0JF4zMnlJ4Rs5I/9hyrzrNGIJC1tzjtOkyqiAMeWVlClLmkxsw0IFGYasI1IX47JFvqv/Dy+w+5iw==}
+  /@ts-ghost/content-api@4.0.8:
+    resolution: {integrity: sha512-UZkfEIKTPGhLDFElDc39WqrzvO1Gtzz9Os0zd4m/C2UxuijDEAXtTiGYKqHG5Udvr/U8tVgGz8hOUwAXKKAEHA==}
     dependencies:
       '@ts-ghost/core-api': 5.0.8
       zod: 3.22.2

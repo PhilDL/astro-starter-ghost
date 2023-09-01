@@ -20,7 +20,7 @@
     "@astrojs/rss": "^3.0.0",
     "@astrojs/sitemap": "^3.0.0",
     "@snowpack/plugin-dotenv": "^2.2.0",
-    "@ts-ghost/content-api": "^4.0.7",
+    "@ts-ghost/content-api": "^4.0.8",
     "@typescript-eslint/eslint-plugin": "^6.5.0",
     "@typescript-eslint/parser": "^6.5.0",
     "astro": "^3.0.5",

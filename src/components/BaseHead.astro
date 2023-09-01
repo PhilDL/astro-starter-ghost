@@ -1,5 +1,7 @@
 ---
 import type { Settings } from "@ts-ghost/content-api";
+import { ViewTransitions } from 'astro:transitions';
+
 export type Props = {
   title: string;
   description: string;
@@ -21,6 +23,7 @@ const { description, permalink, image, settings, title } = Astro.props as Props;
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <title>{title}</title>
+<ViewTransitions />
 <meta name="title" content={title} />
 {description && <meta name="description" content={description} />}
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
